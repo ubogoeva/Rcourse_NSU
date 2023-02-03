@@ -18,4 +18,4 @@ theme: united
 
 ## Предварительный список тем
 
-Можно ознакомиться по [ссылке](https://docs.google.com/document/d/1lRuwQOW2FxIQfBJBg_4soNn-i3zFxYr8/edit#heading=h.gjdgxs)
+Можно ознакомиться по [ссылке](list_of_topics.qmd)
