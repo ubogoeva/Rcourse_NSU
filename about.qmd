@@ -1,0 +1,21 @@
+---
+title: "Обо мне"
+image: photo_EU.jpg
+about:
+  template: jolla
+  links:
+    - icon: linkedin
+      text: LinkedIn
+      href: https://www.linkedin.com/in/elena-ubogoeva/
+    - icon: github
+      text: Github
+      href: https://github.com/ubogoeva
+    - icon: telegram
+      text: телеграм-канал
+      href: https://t.me/stats_for_science
+    - icon: telegram
+      text: личный телеграм
+      href: https://t.me/lena_astr
+---
+
+Всем привет! Меня зовут Елена Убогоева, я закончила бакалавриат и магистратуру факультета естественных наук Новосибирского Государственного университета. Работала биоинформатиком в лаборатории. Хорошо изучила R самостоятельно, но мне не хватало курса в университете по этому языку. Поэтому решила сделать курс самостоятельно

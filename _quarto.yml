@@ -1,0 +1,19 @@
+project:
+  type: website
+
+website:
+  title: "Rcourse_NSU"
+  navbar:
+    right:
+      - about.qmd
+      - icon: github
+        href: https://github.com/ubogoeva
+      - icon: telegram
+        href: https://t.me/stats_for_science
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+
+editor: visual
+
