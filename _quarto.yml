@@ -12,7 +12,7 @@ website:
         href: https://t.me/stats_for_science
 format:
   html:
-    theme: cosmo
+    theme: yeti
     css: styles.css
 
 editor: visual
