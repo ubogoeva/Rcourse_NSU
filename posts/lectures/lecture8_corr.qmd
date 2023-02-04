@@ -1,0 +1,30 @@
+---
+title: "Корреляция и линейная регрессия"
+author: "Елена Убогоева"
+date: '04 Feb 2023'
+execute: 
+  echo: true
+format: 
+  revealjs:
+    slide-number: c/t
+    # mainfont: Arial
+    # fontsize: 14px
+    theme: [default, custom.scss]
+    # theme: [serif]
+    # mouse-wheel: true
+    auto-play-media: true
+    width: 1280
+    height: 720
+draft: true
+editor: visual
+---
+
+## План лекции
+
+[Назад](../../index.qmd)
+
+-   Что такое ковариация и корреляция
+
+-   Линейная регрессия
+
+## Ковариация - мера
