@@ -3,7 +3,8 @@
     "listing": "/index.html",
     "items": [
       "/posts/welcome/list_of_topics.html",
-      "/posts/welcome/R_course_NSU.html"
+      "/posts/welcome/R_course_NSU.html",
+      "/posts/welcome/how_to_install_R.html"
     ]
   }
 ]
