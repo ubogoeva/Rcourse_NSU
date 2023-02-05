@@ -1,0 +1,30 @@
+/*-- scss:defaults --*/
+// fonts
+@import url(https://fonts.googleapis.com/css?family=Cabin:600,600i&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Commissioner&display=swap);
+@import url(https://fonts.googleapis.com/css?family=Amatic+SC:Bold,700&display=swap);
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo&display=swap');
+
+$blue: #00817c;
+$purple: #73245e;
+$dark-purple: #39122f;
+$blue: #00817c;
+$beige: #f8f5f0;
+$dark-beige: #9f8e71;
+
+
+// headings
+$presentation-heading-font: "Cabin", "Commissioner", sans serif !default;
+$presentation-font-size-root: 34px !default;
+$code-block-font-size: 28px !default;
+$presentation-heading-color: $blue !default;
+
+
+// fonts
+$font-family-sans-serif: "Commissioner" !default;
+$presentation-heading-font: "Quicksand", sans-serif !default;
+
+// code
+$code-block-bg: $beige !default;
+$code-color: $purple !default;
+$code-block-border-color: $dark-beige !default;
