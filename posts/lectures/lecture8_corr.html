@@ -338,16 +338,92 @@
 </section>
 <section id="план-лекции" class="slide level2">
 <h2>План лекции</h2>
-<p><a href="../../index.qmd">Назад</a></p>
 <ul>
 <li><p>Что такое ковариация и корреляция</p></li>
 <li><p>Линейная регрессия</p></li>
 </ul>
 </section>
-<section id="ковариация---мера" class="slide level2">
-<h2>Ковариация - мера</h2>
+<section id="линейная-регрессия" class="slide level2">
+<h2>Линейная регрессия</h2>
+<p>Вообще линейная регрессия является частью общей линейной модели, куда входит также дисперсионный анализ (ANOVA).</p>
+<p>Общий принцип GLM заключается в том, что у нас есть зависимая переменная (dependent variable), которую мы пытаемся описать (предсказать) одной или несколькими независимыми переменными.</p>
+<p>В случае линейной регрессии зависимая переменная должна быть непрерывной, в то время как независимые могут быть как непрерывными, так и категориальными.</p>
+<p>Предсказать - значит найти такую функцию вида <code>y = f(x)</code></p>
+</section>
+<section id="примеры-функций" class="slide level2">
+<h2>Примеры функций</h2>
+<ul>
+<li><p><span class="math inline">\(y = x\)</span>: <code>y</code> в точности равно <code>x</code></p></li>
+<li><p><span class="math inline">\(y = ax\)</span>: <code>y</code> равно <code>x</code> умноженное на константу <code>a</code>. <code>a</code> в этом уравнении часто называют наклон (slope)</p></li>
+<li><p><span class="math inline">\(y = ax + b\)</span>: <code>y</code> равно <code>x</code> умноженное на константу <code>a</code> плюс значение константы <code>b</code></p></li>
+<li><p><span class="math inline">\(y = x^2\)</span> квадратичная зависимость</p></li>
+</ul>
+</section>
+<section id="нотация-уравнений-в-статистике" class="slide level2">
+<h2>Нотация уравнений в статистике</h2>
+<p>Обычно используется уравнение вида:</p>
+<p><span class="math inline">\(y = \beta_0 + \beta_1x_1 + e\)</span>, где <span class="math inline">\(\beta_0\)</span> это <em>интерсепт</em> или перехват (intersept), <span class="math inline">\(\beta_1\)</span> чаще называют <em>коэффициентом</em> (а не наклоном), а <span class="math inline">\(e\)</span> это <em>остаток</em> (residual или error term) - поскольку мы работаем с реальными данными, то почти никогда зависимая переменная <code>y</code> не будет предсказываться в точности независимыми</p>
+</section>
+<section id="пример-разбора-линейной-регрессии" class="slide level2">
+<h2>Пример разбора линейной регрессии</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Создадим игрушечный датасет по предсказанию цены автомобиля в зависимости от возраста. Цены указаны в тысячах евро.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Price Age
+1    29   1
+2    25   2
+3    21   2
+4    18   3
+5    15   4
+6    15   5</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p>Построим <em>диаграмму рассеяния</em> (scatterplot), чтобы отразить зависимость цены от возраста</p>
+<div class="cell">
+<div class="cell-output-display">
+<p><img data-src="lecture8_corr_files/figure-revealjs/unnamed-chunk-2-1.png" width="960"></p>
+</div>
+</div>
+</div>
+</div>
+<p>Теперь попробуем провести прямую линию, которая будет наиболее хорошо описывать точки</p>
+</section>
+<section id="пример-разбора-линейной-регрессии-1" class="slide level2">
+<h2>Пример разбора линейной регрессии</h2>
 
-<div class="footer footer-default">
+<img data-src="lecture8_corr_files/figure-revealjs/unnamed-chunk-3-1.png" width="960" class="r-stretch"></section>
+<section id="допущения-линейной-регрессии" class="slide level2">
+<h2>Допущения линейной регрессии</h2>
+<ul>
+<li><p><strong>Ограничения данных:</strong> предсказываемая переменная должна быть непрерывной, интервальной или ранговой, в теории неограниченной. Независимые переменные могут быть как непрерывными, так и категориальными.</p></li>
+<li><p><strong>Независимость:</strong> каждое наблюдение должно быть независимым от остальных</p></li>
+<li><p><strong>Линейность:</strong> зависимость между зависимой переменной и независимой должна быть линейной</p></li>
+<li><p><strong>Гомоскедастичность</strong> (homoscedasticity) - однородность дисперсий</p></li>
+<li><p>Независимость и нормальное распределение остатков (ошибок, residuals)</p></li>
+<li><p><strong>Проверка на мультиколлинеарность</strong> - в случае множественной линейной регрессии</p></li>
+</ul>
+</section>
+<section id="проверка-допущений" class="slide level2">
+<h2>Проверка допущений</h2>
+<p>Нужно отрисовать сам график и QQ-plot</p>
+<p>scatter plot:</p>
+
+<img data-src="https://www.tibco.com/sites/tibco/files/media_entity/2022-01/scatter-chart-example.svg" class="r-stretch"></section>
+<section class="slide level2">
+
+<p><br>
+Например такой график говорит о почти полном соблюдении допущения гомоскедастичности:</p>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Normal_normal_qq.svg/450px-Normal_normal_qq.svg.png" width="431" class="r-stretch"></section>
+<section id="мультиколлинеарность" class="slide level2">
+<h2>Мультиколлинеарность</h2>
+<p>Если в множественной линейной регрессии много скоррелированных друг с другом переменных, то это может сильно испортить значения коэффициентов, p-value и доверительные интервалы. Чтобы проверить на скоррелированность нужно посчитать VIF (variance inflation factor)</p>
+
+
+<img data-src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9ece9d349f82af412b94fcdd2e81c1c6de926936.png" class="r-stretch"><div class="footer footer-default">
 
 </div>
 </section>
@@ -562,6 +638,44 @@
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {
