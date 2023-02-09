@@ -6,7 +6,6 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Елена Убогоева">
 <meta name="dcterms.date" content="2023-02-04">
 
 <title>Rcourse_NSU - Ссылка на лекции</title>
@@ -61,7 +60,6 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
-  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="../../styles.css">
 </head>
@@ -106,7 +104,7 @@ ul.task-list li input[type="checkbox"] {
 <header id="title-block-header" class="quarto-title-block default page-columns page-full">
   <div class="quarto-title-banner page-columns page-full">
     <div class="quarto-title column-body">
-      <h1 class="title">Корреляция и линейная регрессия</h1>
+      <h1 class="title">Ссылка на лекции</h1>
                       </div>
   </div>
     
@@ -117,7 +115,7 @@ ul.task-list li input[type="checkbox"] {
       <div>
       <div class="quarto-title-meta-heading">Published</div>
       <div class="quarto-title-meta-contents">
-        <p class="date">04 Feb 2023</p>
+        <p class="date">February 4, 2023</p>
       </div>
     </div>
     
@@ -136,98 +134,9 @@ ul.task-list li input[type="checkbox"] {
 
 
 <p>Здесь будут храниться лекции:</p>
-<p>Лекция 8:</p>
-<section id="план-лекции" class="level2">
-<h2 class="anchored" data-anchor-id="план-лекции">План лекции</h2>
-<ul>
-<li><p>Что такое ковариация и корреляция</p></li>
-<li><p>Линейная регрессия</p></li>
-</ul>
-</section>
-<section id="линейная-регрессия" class="level2">
-<h2 class="anchored" data-anchor-id="линейная-регрессия">Линейная регрессия</h2>
-<p>Вообще линейная регрессия является частью общей линейной модели, куда входит также дисперсионный анализ (ANOVA).</p>
-<p>Общий принцип GLM заключается в том, что у нас есть зависимая переменная (dependent variable), которую мы пытаемся описать (предсказать) одной или несколькими независимыми переменными.</p>
-<p>В случае линейной регрессии зависимая переменная должна быть непрерывной, в то время как независимые могут быть как непрерывными, так и категориальными.</p>
-<p>Предсказать - значит найти такую функцию вида <code>y = f(x)</code></p>
-</section>
-<section id="примеры-функций" class="level2">
-<h2 class="anchored" data-anchor-id="примеры-функций">Примеры функций</h2>
-<ul>
-<li><p><span class="math inline">\(y = x\)</span>: <code>y</code> в точности равно <code>x</code></p></li>
-<li><p><span class="math inline">\(y = ax\)</span>: <code>y</code> равно <code>x</code> умноженное на константу <code>a</code>. <code>a</code> в этом уравнении часто называют наклон (slope)</p></li>
-<li><p><span class="math inline">\(y = ax + b\)</span>: <code>y</code> равно <code>x</code> умноженное на константу <code>a</code> плюс значение константы <code>b</code></p></li>
-<li><p><span class="math inline">\(y = x^2\)</span> квадратичная зависимость</p></li>
-</ul>
-</section>
-<section id="нотация-уравнений-в-статистике" class="level2">
-<h2 class="anchored" data-anchor-id="нотация-уравнений-в-статистике">Нотация уравнений в статистике</h2>
-<p>Обычно используется уравнение вида:</p>
-<p><span class="math inline">\(y = \beta_0 + \beta_1x_1 + e\)</span>, где <span class="math inline">\(\beta_0\)</span> это <em>интерсепт</em> или перехват (intersept), <span class="math inline">\(\beta_1\)</span> чаще называют <em>коэффициентом</em> (а не наклоном), а <span class="math inline">\(e\)</span> это <em>остаток</em> (residual или error term) - поскольку мы работаем с реальными данными, то почти никогда зависимая переменная <code>y</code> не будет предсказываться в точности независимыми</p>
-</section>
-<section id="пример-разбора-линейной-регрессии" class="level2">
-<h2 class="anchored" data-anchor-id="пример-разбора-линейной-регрессии">Пример разбора линейной регрессии</h2>
-<div class="columns">
-<div class="column" style="width:50%;">
-<p>Создадим игрушечный датасет по предсказанию цены автомобиля в зависимости от возраста. Цены указаны в тысячах евро.</p>
-<div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>  Price Age
-1    29   1
-2    25   2
-3    21   2
-4    18   3
-5    15   4
-6    15   5</code></pre>
-</div>
-</div>
-</div><div class="column" style="width:50%;">
-<p>Построим <em>диаграмму рассеяния</em> (scatterplot), чтобы отразить зависимость цены от возраста</p>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="sample_files/figure-html/unnamed-chunk-2-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</div>
-</div>
-<p>Теперь попробуем провести прямую линию, которая будет наиболее хорошо описывать точки</p>
-</section>
-<section id="пример-разбора-линейной-регрессии-1" class="level2">
-<h2 class="anchored" data-anchor-id="пример-разбора-линейной-регрессии-1">Пример разбора линейной регрессии</h2>
-<div class="cell">
-<div class="cell-output-display">
-<p><img src="sample_files/figure-html/unnamed-chunk-3-1.png" class="img-fluid" width="672"></p>
-</div>
-</div>
-</section>
-<section id="допущения-линейной-регрессии" class="level2">
-<h2 class="anchored" data-anchor-id="допущения-линейной-регрессии">Допущения линейной регрессии</h2>
-<ul>
-<li><p><strong>Ограничения данных:</strong> предсказываемая переменная должна быть непрерывной, интервальной или ранговой, в теории неограниченной. Независимые переменные могут быть как непрерывными, так и категориальными.</p></li>
-<li><p><strong>Независимость:</strong> каждое наблюдение должно быть независимым от остальных</p></li>
-<li><p><strong>Линейность:</strong> зависимость между зависимой переменной и независимой должна быть линейной</p></li>
-<li><p><strong>Гомоскедастичность</strong> (homoscedasticity) - однородность дисперсий</p></li>
-<li><p>Независимость и нормальное распределение остатков (ошибок, residuals)</p></li>
-<li><p><strong>Проверка на мультиколлинеарность</strong> - в случае множественной линейной регрессии</p></li>
-</ul>
-</section>
-<section id="проверка-допущений" class="level2">
-<h2 class="anchored" data-anchor-id="проверка-допущений">Проверка допущений</h2>
-<p>Нужно отрисовать сам график и QQ-plot</p>
-<p>scatter plot:</p>
-<p><img src="https://www.tibco.com/sites/tibco/files/media_entity/2022-01/scatter-chart-example.svg" class="img-fluid"></p>
-<hr>
-<p><br>
-Например такой график говорит о почти полном соблюдении допущения гомоскедастичности:</p>
-<p><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/08/Normal_normal_qq.svg/450px-Normal_normal_qq.svg.png" class="img-fluid" width="431"></p>
-</section>
-<section id="мультиколлинеарность" class="level2">
-<h2 class="anchored" data-anchor-id="мультиколлинеарность">Мультиколлинеарность</h2>
-<p>Если в множественной линейной регрессии много скоррелированных друг с другом переменных, то это может сильно испортить значения коэффициентов, p-value и доверительные интервалы. Чтобы проверить на скоррелированность нужно посчитать VIF (variance inflation factor)</p>
-<p><img src="https://wikimedia.org/api/rest_v1/media/math/render/svg/9ece9d349f82af412b94fcdd2e81c1c6de926936.png" class="img-fluid"></p>
+<p>Лекция 8: </p>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
