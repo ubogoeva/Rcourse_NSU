@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/lectures/index.html",
       "/posts/first_lecture_info.html",
       "/posts/list_of_topics.html",
       "/posts/R_course_NSU.html",
