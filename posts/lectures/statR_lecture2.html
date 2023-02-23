@@ -463,8 +463,7 @@
 <p><img data-src="https://habrastorage.org/files/9ec/4ea/93a/9ec4ea93ab9a440e8a293a87df6dc303.gif" width="513"></p>
 </div>
 </div>
-<p>Матрица - двухмерный массив данных, обычно чисел.</p>
-<p>Матрица может содержать данные <strong>только одного типа</strong>.</p>
+<p>Матрица - двухмерный набор данных. Матрица, как и вектор, может содержать данные <strong>только одного типа</strong>.</p>
 <div class="callout callout-note callout-style-simple">
 <div class="callout-body">
 <div class="callout-icon-container">
@@ -478,7 +477,7 @@
 </section>
 <section id="индексация-матриц" class="slide level2">
 <h2>Индексация матриц</h2>
-<p>Для индексации используем квадратные скобки, матрицы имеют два измерения, соответственно надо прописывать оба: <code>matrix[rows, columns]</code></p>
+<p>Для индексации используем квадратные скобки, матрицы имеют два измерения, следовательно, надо прописывать оба: <code>matrix[rows, columns]</code></p>
 <div>
 <ul>
 <li class="fragment"><p>Поэлементное извлечение</p>
@@ -504,16 +503,6 @@
 </div>
 </div></li>
 </ul>
-</div>
-<div class="callout callout-important callout-style-simple">
-<div class="callout-body">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-content">
-<p>Важно не запутаться, где должна быть запятая и не забыть про пропущенный второй индекс</p>
-</div>
-</div>
 </div>
 </section>
 <section id="индексация-матриц-1" class="slide level2">
@@ -550,9 +539,9 @@
 </div>
 </div>
 </section>
-<section id="индексация-матриц-2" class="slide level2">
-<h2>Индексация матриц</h2>
-<p>Также, как и при работе с векторами, часть элементов матрицы можно переписать</p>
+<section id="замена-элементов-матриц" class="slide level2">
+<h2>Замена элементов матриц</h2>
+<p>Также, как и при работе с векторами, часть элементов матрицы можно переписать.</p>
 <p>Вспомним как для векторов:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>x <span class="ot">&lt;-</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">10</span></span>
@@ -577,7 +566,7 @@
 </section>
 <section id="списки-lists" class="slide level2">
 <h2>Списки (lists)</h2>
-<p>Список в R может содержать данные разного типа, даже другие списки. Список можно создать функцией <code>list</code></p>
+<p>Список в R может содержать данные разного типа, даже другие списки. Список можно создать функцией <code>list()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>list1 <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="st">'Hello world'</span>, <span class="cn">TRUE</span>)</span>
 <span id="cb21-2"><a href="#cb21-2"></a>list1</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -593,11 +582,10 @@
 </div>
 </div>
 </section>
-<section id="списки-lists-1" class="slide level2">
-<h2>Списки (lists)</h2>
-<p>Можно создавать сложные вложенные списки</p>
+<section id="вложенные-списки" class="slide level2">
+<h2>Вложенные списки</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>list_complex <span class="ot">&lt;-</span> <span class="fu">list</span>(list1, <span class="fu">c</span>(<span class="st">'complex list'</span>))</span>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>list_complex <span class="ot">&lt;-</span> <span class="fu">list</span>(list1, <span class="fu">c</span>(<span class="st">'this'</span>, <span class="st">'is'</span>, <span class="st">'complex list'</span>))</span>
 <span id="cb23-2"><a href="#cb23-2"></a>list_complex</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
@@ -612,13 +600,14 @@
 
 
 [[2]]
-[1] "complex list"</code></pre>
+[1] "this"         "is"           "complex list"</code></pre>
 </div>
 </div>
+<p>Обычно сложные вложенные списки никто намеренно не создает, но такой список может возникнуть например после парсинга сайтов или терминов генной онтологии</p>
 </section>
 <section id="структура-листа" class="slide level2 smaller">
 <h2>Структура листа</h2>
-<p>У сложных листов удобно посмотреть структуру, используя функцию <code>str</code></p>
+<p>У сложных списков удобно посмотреть структуру, используя функцию <code>str</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">str</span>(list_complex)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -627,16 +616,16 @@
   ..$ : int [1:5] 1 2 3 4 5
   ..$ : chr "Hello world"
   ..$ : logi TRUE
- $ : chr "complex list"</code></pre>
+ $ : chr [1:3] "this" "is" "complex list"</code></pre>
 </div>
 </div>
-<p>Можно создавать именованные листы:</p>
+<p>Можно создавать именованные списки:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">name =</span> <span class="st">'JoJo'</span>, <span class="at">age =</span> <span class="dv">24</span>, <span class="at">sex =</span> <span class="st">'male'</span>)</span>
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1"></a>named_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="at">gene_name =</span> <span class="st">'HOBBIT'</span>, <span class="at">age =</span> <span class="dv">24</span>, <span class="at">sex =</span> <span class="st">'male'</span>)</span>
 <span id="cb27-2"><a href="#cb27-2"></a>named_list</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>$name
-[1] "JoJo"
+<pre><code>$gene_name
+[1] "HOBBIT"
 
 $age
 [1] 24
@@ -667,13 +656,13 @@ $sex
 <pre><code>[1] 1</code></pre>
 </div>
 </div>
-<p>Получился лист длиной 1. Как же извлечь элемент списка не в виде списка?</p>
+<p>Получился список длиной 1. Как же извлечь элемент списка не в виде списка?</p>
 </div><div class="column" style="width:60%;">
 <p>Иллюстрация:</p>
 <div class="quarto-figure quarto-figure-left">
 <figure>
 <p><img data-src="https://i.stack.imgur.com/6Vwry.png" width="629"></p>
-<p></p><figcaption>Взято из твиттера @hadleywickham</figcaption><p></p>
+<p></p><figcaption>Взято из твиттера <a href="https://twitter.com/hadleywickham">@hadleywickham</a></figcaption><p></p>
 </figure>
 </div>
 </div>
@@ -681,16 +670,22 @@ $sex
 </section>
 <section id="индексация-списков-1" class="slide level2">
 <h2>Индексация списков</h2>
-<p>Чтобы извлечь элемент листа не в виде списка нужно использовать две квадратные скобки <code>sample_list[[1]]</code></p>
+<p>Чтобы извлечь элемент списка не в виде списка можно использовать две квадратные скобки <code>sample_list[[1]]</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb35"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1"></a>list1[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 3 4 5</code></pre>
 </div>
 </div>
-<p>Также можно использовать индексацию по имени</p>
+<p>Также можно использовать индексацию по имени: используя знак <code>$</code> или в квадратных скобках в кавычках</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb37"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1"></a>named_list<span class="sc">$</span>age</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 24</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>named_list[[<span class="st">'age'</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 24</code></pre>
 </div>
@@ -698,13 +693,13 @@ $sex
 </section>
 <section id="датафреймы" class="slide level2">
 <h2>Датафреймы</h2>
-<p>Датафреймы - прямоугольные таблицы и центральный объект всего анализа данных как науки. Нам понадобится много работать с датафреймами.</p>
-<p>Попробуем создать датафрейм</p>
+<p>Датафреймы - прямоугольные таблицы, которые могут содержать данные <strong>разного типа</strong>. Нам понадобится много работать с датафреймами.</p>
+<p>Попробуем создать датафрейм: функция <code>data.frame()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">'Lena'</span>, <span class="st">'Yulia'</span>, <span class="st">'Ekaterina'</span>), </span>
-<span id="cb39-2"><a href="#cb39-2"></a>                 <span class="at">education =</span> <span class="fu">c</span>(<span class="st">'biology'</span>, <span class="st">'biology'</span>, <span class="st">'chemistry'</span>),</span>
-<span id="cb39-3"><a href="#cb39-3"></a>                 <span class="at">topics =</span> <span class="fu">c</span>(<span class="st">'baseR'</span>, <span class="st">'RNA-seq'</span>, <span class="st">'linear_model'</span>))</span>
-<span id="cb39-4"><a href="#cb39-4"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">names =</span> <span class="fu">c</span>(<span class="st">'Lena'</span>, <span class="st">'Yulia'</span>, <span class="st">'Ekaterina'</span>), </span>
+<span id="cb41-2"><a href="#cb41-2"></a>                 <span class="at">education =</span> <span class="fu">c</span>(<span class="st">'biology'</span>, <span class="st">'biology'</span>, <span class="st">'chemistry'</span>),</span>
+<span id="cb41-3"><a href="#cb41-3"></a>                 <span class="at">topics =</span> <span class="fu">c</span>(<span class="st">'baseR'</span>, <span class="st">'RNA-seq'</span>, <span class="st">'linear_model'</span>))</span>
+<span id="cb41-4"><a href="#cb41-4"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      names education       topics
 1      Lena   biology        baseR
@@ -715,9 +710,167 @@ $sex
 </section>
 <section id="индексация-датафреймов" class="slide level2">
 <h2>Индексация датафреймов</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p>Индексация датафреймов объединяет принципы индексации матриц и списков.</p>
+</div><div class="column" style="width:50%;">
+<p><img data-src="figures/matrix-list-df.png"></p>
+</div>
+</div>
 </section>
-<section id="условия-и-циклы" class="slide level2">
-<h2>Условия и циклы</h2>
+<section id="индексация-датафреймов-как-матриц" class="slide level2">
+<h2>Индексация датафреймов как матриц</h2>
+<p>Используя квадратные скобки и индекс строк, колонок</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>df[<span class="dv">2</span><span class="sc">:</span><span class="dv">3</span>, <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>      names education
+2     Yulia   biology
+3 Ekaterina chemistry</code></pre>
+</div>
+</div>
+</section>
+<section id="индексация-датафреймов-как-списков" class="slide level2">
+<h2>Индексация датафреймов как списков</h2>
+<p>С помощью знака <code>$</code>, также можно с помощью квадратных скобок</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a>df<span class="sc">$</span>names</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Lena"      "Yulia"     "Ekaterina"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a>df<span class="sc">$</span>education</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "biology"   "biology"   "chemistry"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a>df<span class="sc">$</span>names <span class="sc">==</span> df[, <span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] TRUE TRUE TRUE</code></pre>
+</div>
+</div>
+</section>
+<section id="создание-новых-колонок" class="slide level2">
+<h2>Создание новых колонок</h2>
+<p>Похоже на обращение к существующей, но пишем новое название и заполняем значениями</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>df<span class="sc">$</span>new_column <span class="ot">&lt;-</span> <span class="st">'a'</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Подробнее про работу с датафреймами еще поговорим</p>
+</section>
+<section id="условные-конструкции-if" class="slide level2">
+<h2>Условные конструкции: <code>if</code></h2>
+<p>Синтаксис условной конструкции: <code>if (condition) expression</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1"></a>number <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb52-2"><a href="#cb52-2"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">'Положительное число'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Положительное число"</code></pre>
+</div>
+</div>
+<p>Если выражение содержит несколько строчек, то необходимо использовать фигурные скобки</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1"></a>number <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb54-2"><a href="#cb54-2"></a><span class="cf">if</span> (number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb54-3"><a href="#cb54-3"></a>  <span class="fu">print</span>(<span class="st">'Положительное число'</span>)</span>
+<span id="cb54-4"><a href="#cb54-4"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Положительное число"</code></pre>
+</div>
+</div>
+</section>
+<section id="условные-конструкции-if-else" class="slide level2">
+<h2>Условные конструкции: <code>if</code>, <code>else</code></h2>
+<p>Для описания действий в случае не выполнения условия используется оператор <code>else</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb56"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1"></a>random_number <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="sc">-</span><span class="dv">5</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">1</span>) <span class="co"># чтобы извлечь случайное число </span></span>
+<span id="cb56-2"><a href="#cb56-2"></a><span class="co"># из набора чисел от -5 до 5</span></span>
+<span id="cb56-3"><a href="#cb56-3"></a>random_number</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 2</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb58"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1"></a><span class="cf">if</span> (random_number <span class="sc">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb58-2"><a href="#cb58-2"></a>  <span class="fu">print</span>(<span class="st">'Положительное число'</span>)</span>
+<span id="cb58-3"><a href="#cb58-3"></a>} <span class="cf">else</span> {</span>
+<span id="cb58-4"><a href="#cb58-4"></a>  <span class="fu">print</span>(<span class="st">'Отрицательное число или ноль'</span>)</span>
+<span id="cb58-5"><a href="#cb58-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Положительное число"</code></pre>
+</div>
+</div>
+<div class="callout callout-important callout-style-simple">
+<div class="callout-body">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-content">
+<p>Поскольку команды в R исполняются построчно, важно, чтобы оператор <code>else</code> был на той же строке, что и закрывающая фигурная скобка <code>if</code></p>
+</div>
+</div>
+</div>
+</section>
+<section id="векторизованный-if" class="slide level2">
+<h2>Векторизованный <code>if</code></h2>
+<p>Оператор if на вход принимает только одно число. Что делать, если нам нужно подать на вход в if целый вектор?</p>
+<p>Вот это работать не будет:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb60"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1"></a><span class="cf">if</span> (<span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span> <span class="sc">&gt;</span> <span class="dv">0</span>) <span class="fu">print</span>(<span class="st">'Положительное число'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Для операции над векторами используем функцию <code>ifelse()</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a>x <span class="ot">&lt;-</span> <span class="sc">-</span><span class="dv">3</span><span class="sc">:</span><span class="dv">3</span></span>
+<span id="cb61-2"><a href="#cb61-2"></a><span class="fu">ifelse</span>(x <span class="sc">&gt;</span> <span class="dv">0</span>, <span class="st">'Положительное число или ноль'</span>, <span class="st">'Отрицательное число'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число"          "Отрицательное число"         
+[3] "Отрицательное число"          "Отрицательное число"         
+[5] "Положительное число или ноль" "Положительное число или ноль"
+[7] "Положительное число или ноль"</code></pre>
+</div>
+</div>
+</section>
+<section id="оператор-case_when" class="slide level2">
+<h2>Оператор case_when</h2>
+<p>Если условий больше двух (или даже больше одного), на помощь приходит функция <code>case_when()</code> из пакета <code>dplyr</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a>dplyr<span class="sc">::</span><span class="fu">case_when</span>(x <span class="sc">&gt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">'Положительное число'</span>, x <span class="sc">==</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">'Ноль'</span>, x <span class="sc">&lt;</span> <span class="dv">0</span> <span class="sc">~</span> <span class="st">'Отрицательное число'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Отрицательное число" "Отрицательное число" "Отрицательное число"
+[4] "Ноль"                "Положительное число" "Положительное число"
+[7] "Положительное число"</code></pre>
+</div>
+</div>
+</section>
+<section id="циклы" class="slide level2">
+<h2>Циклы</h2>
+<p>Циклы в R не рекомендованы к использованию, однако их вред можно минимизировать.</p>
+<p>Синтаксис:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb65"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1"></a><span class="cf">for</span> (variable <span class="cf">in</span> vector) {</span>
+<span id="cb65-2"><a href="#cb65-2"></a>  <span class="sc">&lt;</span>набор действий<span class="sc">&gt;</span></span>
+<span id="cb65-3"><a href="#cb65-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Например</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) {</span>
+<span id="cb66-2"><a href="#cb66-2"></a>  <span class="fu">print</span>(i <span class="sc">^</span> <span class="dv">2</span>)</span>
+<span id="cb66-3"><a href="#cb66-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 1
+[1] 4
+[1] 9
+[1] 16
+[1] 25
+[1] 36</code></pre>
+</div>
+</div>
+<p>Конечно, именно такое куда проще сделать так:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb68"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1"></a>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>) <span class="sc">^</span> <span class="dv">2</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  1  4  9 16 25 36</code></pre>
+</div>
+</div>
+</section>
+<section id="векторизация" class="slide level2">
+<h2>Векторизация</h2>
 </section>
 <section id="написание-своих-функций" class="slide level2">
 <h2>Написание своих функций</h2>

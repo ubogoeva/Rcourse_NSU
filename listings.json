@@ -2,6 +2,7 @@
   {
     "listing": "/index.html",
     "items": [
+      "/posts/tasks/task1.html",
       "/posts/lectures/index.html",
       "/posts/first_lecture_info.html",
       "/posts/list_of_topics.html",
