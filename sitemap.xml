@@ -2,38 +2,42 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/about.html</loc>
-    <lastmod>2023-03-01T07:23:01.042Z</lastmod>
+    <lastmod>2023-03-02T05:40:48.527Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/index.html</loc>
-    <lastmod>2023-03-01T07:23:01.881Z</lastmod>
+    <lastmod>2023-03-02T05:40:49.525Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/first_lecture_info.html</loc>
-    <lastmod>2023-03-01T07:23:02.470Z</lastmod>
+    <lastmod>2023-03-02T05:40:50.055Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/how_to_install_R.html</loc>
-    <lastmod>2023-03-01T07:23:03.068Z</lastmod>
+    <lastmod>2023-03-02T05:40:50.624Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/lectures/index.html</loc>
-    <lastmod>2023-03-01T07:23:03.605Z</lastmod>
+    <lastmod>2023-03-02T05:40:51.139Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/list_of_topics.html</loc>
-    <lastmod>2023-03-01T07:23:09.026Z</lastmod>
+    <lastmod>2023-03-02T05:40:58.929Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/R_course_NSU.html</loc>
-    <lastmod>2023-03-01T07:23:09.550Z</lastmod>
+    <lastmod>2023-03-02T05:40:59.353Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/solutions/solution1.html</loc>
+    <lastmod>2023-03-02T05:41:00.094Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/tasks/task1.html</loc>
-    <lastmod>2023-03-01T07:23:10.409Z</lastmod>
+    <lastmod>2023-03-02T05:41:00.806Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/tasks/task2.html</loc>
-    <lastmod>2023-03-01T07:23:11.127Z</lastmod>
+    <lastmod>2023-03-02T05:41:01.557Z</lastmod>
   </url>
 </urlset>

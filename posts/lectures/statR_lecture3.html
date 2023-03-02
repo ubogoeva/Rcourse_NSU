@@ -401,13 +401,18 @@
 </section>
 <section id="повторим-материал-предыдущей-лекции" class="slide level2">
 <h2>Повторим материал предыдущей лекции</h2>
+<ul>
+<li><p>Матрицы, списки, датафреймы</p></li>
+<li><p>Условия и циклы</p></li>
+<li><p>Основы векторизации</p></li>
+</ul>
 </section>
 <section id="план-лекции" class="slide level2">
 <h2>План лекции</h2>
 <ul>
 <li><p>Операции над векторами разной длины, ресайклинг</p></li>
-<li><p>Семейство функций apply</p></li>
 <li><p>Создание собственных функций</p></li>
+<li><p>Семейство функций *apply()</p></li>
 <li><p>Импорт и экспорт данных</p></li>
 </ul>
 </section>
@@ -431,8 +436,71 @@
 <p>Теперь представим, что векторы у нас разной длины</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>long_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>)</span>
-<span id="cb3-2"><a href="#cb3-2"></a>short_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-2"><a href="#cb3-2"></a>short_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
+<span id="cb3-3"><a href="#cb3-3"></a></span>
+<span id="cb3-4"><a href="#cb3-4"></a>long_vector <span class="sc">+</span> short_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  3  4  7  5  8 13</code></pre>
 </div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>long_vector <span class="sc">-</span> short_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -1 -2 -3  1  2  3</code></pre>
+</div>
+</div>
+<p>Значения вектора меньшего размера как бы переиспользуются (recycling) для значений вектора большего.</p>
+</section>
+<section id="что-произойдет-если-меньший-вектор-не-кратен-большему" class="slide level2">
+<h2>Что произойдет, если меньший вектор не кратен большему?</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>long_vector <span class="sc">-</span> vector2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>Warning in long_vector - vector2: длина большего объекта не является
+произведением длины меньшего объекта</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] -2 -4  1 -1  2  3</code></pre>
+</div>
+</div>
+</section>
+<section id="создание-собственных-функций" class="slide level2">
+<h2>Создание собственных функций</h2>
+<p>Нередко возникает ситуация, когда нужно проделать одну и ту же операцию несколько раз. В таком случае есть смысл написать свою функцию. Действует <a href="https://en.wikipedia.org/wiki/Rule_of_three_(computer_programming)">правило трех</a>: если понадобилось скопировать один и тот же кусочек кода три раза, подумайте о создании функции.</p>
+<p>Преимущества написания функций:</p>
+<ul>
+<li><p>Способ избежать ошибок copy-paste, например, есть риск не поменять название переменной в одном месте.</p></li>
+<li><p>Если необходимо поменять какой-то параметр, то достаточно поменять в функции один раз, а не каждый раз при вызове этого кода.</p></li>
+<li><p>Можно давать функции понятное название, что облегчит восприятие и читаемость кода.</p></li>
+</ul>
+</section>
+<section id="пример-собственной-функции" class="slide level2">
+<h2>Пример собственной функции</h2>
+<p>Функции пишутся по шаблону</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb10-2"><a href="#cb10-2"></a>  body</span>
+<span id="cb10-3"><a href="#cb10-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Например, создадим функцию, которая возводит заданное число в заданную степень.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
+<span id="cb11-2"><a href="#cb11-2"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p</span>
+<span id="cb11-3"><a href="#cb11-3"></a>  <span class="fu">return</span>(power)</span>
+<span id="cb11-4"><a href="#cb11-4"></a>}</span>
+<span id="cb11-5"><a href="#cb11-5"></a><span class="fu">pow</span>(<span class="dv">11</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 14641</code></pre>
+</div>
+</div>
+</section>
+<section id="локальные-и-глобальные-переменные" class="slide level2">
+<h2>Локальные и глобальные переменные</h2>
+<p>При создании функции у нее есть свое собственное окружение. В этом локальном окружении живут переменные функции. Есть глобальное окружение, с которым мы обычно работаем. Если функция не находит нужную переменную в локальном окружении, то она отправляется их искать в глобальном</p>
+</section>
+<section id="аргументы-по-умолчанию" class="slide level2">
+<h2>Аргументы по умолчанию</h2>
 
 <div class="footer footer-default">
 
