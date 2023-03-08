@@ -452,8 +452,8 @@
 </div>
 <p>Значения вектора меньшего размера как бы переиспользуются (recycling) для значений вектора большего.</p>
 </section>
-<section class="slide level2">
-
+<section id="ресайклинг-одного-значения" class="slide level2">
+<h2>Ресайклинг одного значения</h2>
 <p>Можно умножить вектор на какое-то значение, такое задание уже было в домашней работе. Здесь тоже работает правило ресайклинга: единственное значение вектора переиспользуется каждый раз.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>long_vector <span class="sc">*</span> <span class="dv">3</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -486,9 +486,18 @@
 </section>
 <section id="что-произойдет-при-ресайклинге-некратных-векторов" class="slide level2">
 <h2>Что произойдет при ресайклинге некратных векторов?</h2>
+<p>Для проверки длины векторов можно использовать функцию <code>length()</code></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1"></a>vector2 <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">4</span>)</span>
-<span id="cb17-2"><a href="#cb17-2"></a>long_vector <span class="sc">-</span> vector2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb17-2"><a href="#cb17-2"></a><span class="fu">length</span>(long_vector)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 6</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">length</span>(vector2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 4</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a>long_vector <span class="sc">-</span> vector2</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stderr">
 <pre><code>Warning in long_vector - vector2: длина большего объекта не является
 произведением длины меньшего объекта</code></pre>
@@ -512,8 +521,8 @@
 <h2>Pitfalls - подводные камни при ресайклинге</h2>
 <p>Нужно знать о правилах ресайклинга, чтобы понять, почему результат получается не как было задумано. Допустим, у нас есть вектор с какими-то значениями, и мы хотим извлечь определенные, попробуем использовать оператор <code>==</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1"></a>eyes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>, <span class="st">'black'</span>, <span class="st">'blue'</span>, <span class="st">'green'</span>, <span class="st">'green'</span>)</span>
-<span id="cb20-2"><a href="#cb20-2"></a>eyes[eyes <span class="sc">==</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>eyes <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>, <span class="st">'black'</span>, <span class="st">'blue'</span>, <span class="st">'green'</span>, <span class="st">'green'</span>)</span>
+<span id="cb24-2"><a href="#cb24-2"></a>eyes[eyes <span class="sc">==</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  "green"</code></pre>
 </div>
@@ -525,11 +534,11 @@
 <h2>Оператор <code>%in%</code> для проверки наличия элементов вектора</h2>
 <p>Правильно проверять, есть ли элементы в векторе нужно с помощью оператора <code>%in%</code>, здесь можно подать целый вектор значений, который нужно проверить на наличие в векторе.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a>eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>eyes[eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a>eyes[eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] "green" "blue"  "blue"  "green" "green"</code></pre>
 </div>
@@ -539,36 +548,36 @@
 <h2>Полезные функции для работы с векторами</h2>
 <p>Иногда бывает полезно извлечь <em>индексы</em> элементов <code>TRUE</code> логического вектора, тогда можно использовать функцию <code>which()</code>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a>eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a>eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  TRUE  TRUE FALSE  TRUE  TRUE  TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1"></a><span class="fu">which</span>(eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">which</span>(eyes <span class="sc">%in%</span> <span class="fu">c</span>(<span class="st">'green'</span>, <span class="st">'blue'</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 1 2 4 5 6</code></pre>
 </div>
 </div>
 <p>Вообще перевод логического вектора в числовой для индексации может быть полезен, если в векторе очень мало <code>TRUE</code> и размер вектора измеряется в десятках тысяч. Подробнее можно почитать <a href="https://adv-r.hadley.nz/subsetting.html?q=recycling#boolean-algebra-versus-sets-logical-and-integer">здесь</a>.</p>
-<p>Для проверки, есть ли хоть один <code>TRUE</code> в векторе используется функция <code>any()</code>, для проверки, все ли значения в векторе <code>TRUE</code> есть функция <code>all()</code>.</p>
+<p>Для проверки, есть ли хоть один <code>TRUE</code> в векторе используется функция <code>any()</code>, для проверки, все ли значения в векторе <code>TRUE</code>, есть функция <code>all()</code>.</p>
 <div class="columns">
 <div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1"></a><span class="fu">any</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">any</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1"></a><span class="fu">any</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">any</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
 </div>
 </div><div class="column" style="width:50%;">
 <div class="cell">
-<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1"></a><span class="fu">all</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a><span class="fu">all</span>(<span class="fu">c</span>(<span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">FALSE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] FALSE</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1"></a><span class="fu">all</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1"></a><span class="fu">all</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] TRUE</code></pre>
 </div>
@@ -590,17 +599,17 @@
 <h2>Пример собственной функции</h2>
 <p>Функции пишутся по шаблону</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
-<span id="cb38-2"><a href="#cb38-2"></a>  body</span>
-<span id="cb38-3"><a href="#cb38-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1"></a>name <span class="ot">&lt;-</span> <span class="cf">function</span>(arguments) {</span>
+<span id="cb42-2"><a href="#cb42-2"></a>  body</span>
+<span id="cb42-3"><a href="#cb42-3"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Например, создадим функцию, которая возводит заданное число в заданную степень.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
-<span id="cb39-2"><a href="#cb39-2"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p</span>
-<span id="cb39-3"><a href="#cb39-3"></a>  <span class="fu">return</span>(power)</span>
-<span id="cb39-4"><a href="#cb39-4"></a>}</span>
-<span id="cb39-5"><a href="#cb39-5"></a><span class="fu">pow</span>(<span class="dv">11</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a>pow <span class="ot">&lt;-</span> <span class="cf">function</span>(x, p) {</span>
+<span id="cb43-2"><a href="#cb43-2"></a>  power <span class="ot">&lt;-</span> x <span class="sc">^</span> p</span>
+<span id="cb43-3"><a href="#cb43-3"></a>  <span class="fu">return</span>(power)</span>
+<span id="cb43-4"><a href="#cb43-4"></a>}</span>
+<span id="cb43-5"><a href="#cb43-5"></a><span class="fu">pow</span>(<span class="dv">11</span>, <span class="dv">4</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 14641</code></pre>
 </div>
@@ -608,25 +617,25 @@
 </section>
 <section id="позиционные-и-именованные-аргументы" class="slide level2">
 <h2>Позиционные и именованные аргументы</h2>
-<p>Как многие могли заметить, иногда</p>
+<p>Как многие могли заметить, иногда мы задаем в явном виде названия аргументов, а иногда полагаемся на порядок.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 10 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">times =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">times =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 15 10 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">each =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">each =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 10 15 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a><span class="fu">rep</span>(<span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>), <span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">2</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 10 15 15 10 10 15 15</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1"></a><span class="fu">rep</span>(<span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">2</span>, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">rep</span>(<span class="at">each =</span> <span class="dv">2</span>, <span class="at">times =</span> <span class="dv">2</span>, <span class="fu">c</span>(<span class="dv">10</span>, <span class="dv">15</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10 10 15 15 10 10 15 15</code></pre>
 </div>
@@ -637,11 +646,11 @@
 <p>При создании функции у нее есть свое собственное окружение (локальное). В этом локальном окружении существуют переменные функции.</p>
 <p>Есть глобальное окружение, в котором обычно хранятся созданные переменные. Если функция не находит нужную переменную в локальном окружении, то она отправляется их искать в глобальном.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb51-2"><a href="#cb51-2"></a>func1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb51-3"><a href="#cb51-3"></a>  y <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb51-4"><a href="#cb51-4"></a>}</span>
-<span id="cb51-5"><a href="#cb51-5"></a><span class="fu">func1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb55-2"><a href="#cb55-2"></a>func1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb55-3"><a href="#cb55-3"></a>  y <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb55-4"><a href="#cb55-4"></a>}</span>
+<span id="cb55-5"><a href="#cb55-5"></a><span class="fu">func1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110</code></pre>
 </div>
@@ -652,12 +661,37 @@
 <h2>Аргументы по умолчанию</h2>
 <p>Мы уже сталкивались с аргументами по умолчанию в встроенных функциях, например</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1"></a><span class="fu">mean</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 5.5</code></pre>
 </div>
 </div>
 <p>Можно самостоятельно задавать их для своих функций</p>
+</section>
+<section id="функциональное-программирование---семейство-функций-apply" class="slide level2">
+<h2>Функциональное программирование - семейство функций <code>*apply()</code></h2>
+<p>Сама функция <code>apply()</code> применяется к датафреймам или матрицам - то есть двумерным наборам данных.</p>
+<p>Например, задача посчитать среднее по всем столбцам матрицы. Синтаксис: <code>apply(array, margin, function)</code>, где <code>margin</code> - это измерение, по которому будет итерироваться функция function, 1 - это строки, 2 - столбцы.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
+<span id="cb59-2"><a href="#cb59-2"></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>     [,1] [,2] [,3] [,4] [,5]
+[1,]    1    5    9   13   17
+[2,]    2    6   10   14   18
+[3,]    3    7   11   15   19
+[4,]    4    8   12   16   20</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1"></a><span class="fu">apply</span>(M, <span class="dv">2</span>, mean) <span class="co"># подсчет среднего по столбцам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  2.5  6.5 10.5 14.5 18.5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb63"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1"></a><span class="fu">apply</span>(M, <span class="dv">1</span>, mean) <span class="co"># подсчет среднего по строкам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1]  9 10 11 12</code></pre>
+</div>
+</div>
+<p>Существует целый зоопарк сходных функций</p>
 
 <div class="footer footer-default">
 
