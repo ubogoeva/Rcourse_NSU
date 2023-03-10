@@ -2,46 +2,50 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/about.html</loc>
-    <lastmod>2023-03-08T04:35:23.166Z</lastmod>
+    <lastmod>2023-03-10T06:40:58.074Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/index.html</loc>
-    <lastmod>2023-03-08T04:35:23.907Z</lastmod>
+    <lastmod>2023-03-10T06:40:59.083Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/first_lecture_info.html</loc>
-    <lastmod>2023-03-08T04:35:24.321Z</lastmod>
+    <lastmod>2023-03-10T06:40:59.607Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/how_to_install_R.html</loc>
-    <lastmod>2023-03-08T04:35:24.766Z</lastmod>
+    <lastmod>2023-03-10T06:41:00.170Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/lectures/index.html</loc>
-    <lastmod>2023-03-08T04:35:25.184Z</lastmod>
+    <lastmod>2023-03-10T06:41:00.696Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/list_of_topics.html</loc>
-    <lastmod>2023-03-08T04:35:31.976Z</lastmod>
+    <lastmod>2023-03-10T06:41:10.828Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/R_course_NSU.html</loc>
-    <lastmod>2023-03-08T04:35:32.358Z</lastmod>
+    <lastmod>2023-03-10T06:41:11.260Z</lastmod>
+  </url>
+  <url>
+    <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/R_setup.html</loc>
+    <lastmod>2023-03-10T06:41:11.757Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/solutions/solution1.html</loc>
-    <lastmod>2023-03-08T04:35:33.409Z</lastmod>
+    <lastmod>2023-03-10T06:41:12.922Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/solutions/solution2.html</loc>
-    <lastmod>2023-03-08T04:35:34.133Z</lastmod>
+    <lastmod>2023-03-10T06:41:13.901Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/tasks/task1.html</loc>
-    <lastmod>2023-03-08T04:35:35.211Z</lastmod>
+    <lastmod>2023-03-10T06:41:15.178Z</lastmod>
   </url>
   <url>
     <loc>https://ubogoeva.github.io/Rcourse_NSU/posts/tasks/task2.html</loc>
-    <lastmod>2023-03-08T04:35:35.928Z</lastmod>
+    <lastmod>2023-03-10T06:41:15.966Z</lastmod>
   </url>
 </urlset>
