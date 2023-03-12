@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Elena U">
-  <title>Rcourse_NSU - Введение в tidyverse: основные функции dplyr</title>
+  <title>Rcourse_NSU - Язык программирования R для анализа данных: лекция 4</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -97,6 +97,7 @@
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="../../site_libs/revealjs/plugin/reveal-pointer/pointer.css" rel="stylesheet">
   <link href="../../site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
   <style type="text/css">
 
@@ -391,7 +392,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Введение в tidyverse: основные функции dplyr</h1>
+  <h1 class="title">Язык программирования R для анализа данных: лекция 4</h1>
+  <p class="subtitle">Введение в tidyverse, основные функции dplyr</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -426,7 +428,8 @@ Elena U
 </section>
 <section id="подходы-к-анализу-данных-в-r" class="slide level2" style="font-size: 95%">
 <h2>Подходы к анализу данных в R</h2>
-<p>Можно выделить три основных подхода для манипуляций с данными в R: base R, <code>tidyverse</code>, <code>data.table</code>.</p>
+<p>Можно выделить три основных подхода для манипуляций с данными в R:<br>
+base R, <code>tidyverse</code>, <code>data.table</code>.</p>
 <div class="fragment">
 <div style="position: absolute; top: 227px; left: 5px; width: 1270px; height: 223px; background-color: rgba(169, 209, 142, 0.3); z-index: -1; border-radius: 5px;">
 
@@ -505,7 +508,7 @@ Elena U
 <li><p><code>tibble</code> более аккуратный и быстрый вариант датафрейма</p></li>
 <li><p><code>ggplot2</code> для работы с графиками</p></li>
 <li><p><code>stringr</code> для работы со строками</p></li>
-<li><p><code>purrr</code> для замены циклов и функций семейства *apply</p></li>
+<li><p><code>purrr</code> для замены циклов и функций семейства <code>*apply()</code></p></li>
 <li><p><code>forcats</code> для работы с факторами</p></li>
 </ul>
 </div><div class="column" style="width:50%;">
@@ -520,10 +523,10 @@ Elena U
 <li><p>Reading and writing: <a href="https://readr.tidyverse.org/#cheatsheet">readr</a></p></li>
 <li><p>Data manipulation: <a href="https://dplyr.tidyverse.org/#cheat-sheet">dplyr</a></p></li>
 <li><p>Tidying data: <a href="https://tidyr.tidyverse.org/#cheatsheet">tidyr</a></p></li>
-<li><p>Visualisation: <a href="https://ggplot2.tidyverse.org/#cheatsheet">ggplot2</a></p></li>
+<li><p>Visualization: <a href="https://ggplot2.tidyverse.org/#cheatsheet">ggplot2</a></p></li>
 <li><p>String manipulation: <a href="https://stringr.tidyverse.org/#cheatsheet">stringr</a></p></li>
 </ul>
-<p>Лучше всего найти актуальные читшиты из самой RStudio: Help -&gt; Cheet Sheets</p>
+<p>Лучше всего найти актуальные читшиты из самой RStudio: Help -&gt; Cheet Sheets (иначе можно наткнуться на устаревший читшит).</p>
 </section>
 <section id="установка-tidyverse" class="slide level2">
 <h2>Установка tidyverse</h2>
@@ -590,7 +593,7 @@ Elena U
 </section>
 <section id="dplyr---мощный-пакет-для-преобразования-таблиц" class="slide level2">
 <h2>dplyr - мощный пакет для преобразования таблиц</h2>
-<p>Есть множество dplyr <em>глаголов</em> (verbs), которые позволяют сделать практически любое преобразование данных. Основными и наиболее часто использующими <em>глаголами</em> являются:</p>
+<p>Есть множество <code>dplyr</code> <em>глаголов</em> (verbs), которые позволяют сделать практически любое преобразование данных. Основными и наиболее часто использующими <em>глаголами</em> являются:</p>
 <ul>
 <li><code>select()</code> - выбор столбцов по названию или индексу;</li>
 <li><code>filter()</code> - выбор строк по условию;</li>
@@ -4108,6 +4111,7 @@ Elena U
   <script src="../../site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
   <script src="../../site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="../../site_libs/revealjs/plugin/reveal-pointer/pointer.js"></script>
   <script src="../../site_libs/revealjs/plugin/quarto-support/support.js"></script>
   
 
@@ -4130,6 +4134,7 @@ Elena U
 'autoAnimateDuration': 1,
 'autoAnimateUnmatched': true,
 'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'pointer': {"key":"q","color":"red","pointerSize":16,"alwaysVisible":false},
 'smaller': false,
  
         // Display controls in the bottom right corner
@@ -4300,7 +4305,7 @@ Elena U
         },
 
         // reveal.js plugins
-        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, RevealPointer, QuartoSupport,
 
           RevealMath,
           RevealNotes,

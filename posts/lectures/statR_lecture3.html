@@ -436,6 +436,8 @@
 <section id="операции-над-векторами-разной-длины" class="slide level2">
 <h2>Операции над векторами разной длины</h2>
 <p>Теперь представим, что векторы у нас разной длины, попробуем сделать сложение и вычитание:</p>
+<div class="columns">
+<div class="column" style="width:50%;">
 <div class="cell">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1"></a>long_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">8</span>)</span>
 <span id="cb3-2"><a href="#cb3-2"></a>short_vector <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">5</span>)</span>
@@ -449,6 +451,10 @@
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a>long_vector <span class="sc">-</span> short_vector</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1 -2 -3  1  2  3</code></pre>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/image-74450106.png" width="444"></p>
 </div>
 </div>
 <p>Значения вектора меньшего размера как бы переиспользуются (recycling) для значений вектора большего.</p>
@@ -721,7 +727,7 @@
 <h2>Создание своей полезной функции</h2>
 <p>Попробуем создать полезную функцию, вычисляющую моду - наиболее часто встречающееся значение в выборке. Здесь будут полезны функции <code>table()</code> и <code>which.max()</code> - возвращает индекс максимального значения</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>)</span>
+<div class="sourceCode cell-code" id="cb66"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># чтобы случайное семплирование воспроизводилось</span></span>
 <span id="cb66-2"><a href="#cb66-2"></a>x <span class="ot">&lt;-</span> <span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, <span class="dv">15</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
 <span id="cb66-3"><a href="#cb66-3"></a>x</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -743,31 +749,42 @@
 </div>
 </div>
 </section>
-<section id="локальное-и-глобальное-окружение" class="slide level2">
+<section id="простые-числа" class="slide level2">
+<h2>Простые числа</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>is_prime <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb72-2"><a href="#cb72-2"></a>  <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">1</span>) <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb72-3"><a href="#cb72-3"></a>  <span class="cf">if</span> (x <span class="sc">==</span> <span class="dv">2</span>) <span class="fu">return</span>(<span class="dv">2</span>)</span>
+<span id="cb72-4"><a href="#cb72-4"></a>  <span class="cf">if</span> (<span class="fu">sum</span>(x <span class="sc">%%</span> <span class="dv">2</span><span class="sc">:</span>(x<span class="dv">-1</span>) <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">==</span> <span class="dv">0</span>) <span class="fu">return</span>(x) <span class="cf">else</span> <span class="fu">return</span>(<span class="cn">FALSE</span>)</span>
+<span id="cb72-5"><a href="#cb72-5"></a>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="локальное-и-глобальное-окружение" class="slide level2" style="font-size: 85%">
 <h2>Локальное и глобальное окружение</h2>
 <p>При создании функции у нее есть свое собственное окружение (локальное). В этом локальном окружении существуют переменные функции.</p>
-<p>Есть глобальное окружение, в котором обычно хранятся созданные переменные. Если функция не находит нужную переменную в локальном окружении, то она отправляется их искать в предыдущем окружении в общем случае в глобальном.</p>
+<p>Есть глобальное окружение, в котором обычно хранятся созданные переменные. Если функция не находит нужную переменную в локальном окружении, то она отправляется их искать в предыдущем окружении - в общем случае в глобальном.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb72"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
-<span id="cb72-2"><a href="#cb72-2"></a>func1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb72-3"><a href="#cb72-3"></a>  y <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span></span>
-<span id="cb72-4"><a href="#cb72-4"></a>}</span>
-<span id="cb72-5"><a href="#cb72-5"></a><span class="fu">func1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb73"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb73-1"><a href="#cb73-1"></a>y <span class="ot">&lt;-</span> <span class="dv">10</span></span>
+<span id="cb73-2"><a href="#cb73-2"></a>func1 <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
+<span id="cb73-3"><a href="#cb73-3"></a>  y <span class="sc">+</span> x <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb73-4"><a href="#cb73-4"></a>}</span>
+<span id="cb73-5"><a href="#cb73-5"></a><span class="fu">func1</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 110</code></pre>
 </div>
 </div>
 <p>Однако это не является хорошей практикой, всегда рекомендуется создавать переменные внутри функции и не надеяться на глобальное окружение.</p>
+<p>Созданные переменные внутри функции не попадают в глобальное окружение.</p>
 </section>
 <section id="аргументы-по-умолчанию" class="slide level2">
 <h2>Аргументы по умолчанию</h2>
 <p>Нередко встречается ситуация, когда какой-то аргумент функции используется чаще других. В таком случае есть смысл задать аргумент по умолчанию, например в функции <code>sort()</code>, по умолчанию аргумент <code>decreasing = FALSE</code>, следовательно, функция сортирует по возрастанию.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="fu">sort</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1"></a><span class="fu">sort</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] -1  1  2  4  5 10</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb76"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1"></a><span class="fu">sort</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1"></a><span class="fu">sort</span>(<span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">4</span>, <span class="dv">2</span>, <span class="sc">-</span><span class="dv">1</span>, <span class="dv">10</span>, <span class="dv">5</span>), <span class="at">decreasing =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 10  5  4  2  1 -1</code></pre>
 </div>
@@ -778,10 +795,10 @@
 <h2>Ленивые вычисления (lazy evaluation)</h2>
 <p>Аргументы функции могут не использоваться, если их не вызвать эксплицитно, поскольку в R есть концепция <em>ленивых вычислений</em>.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb78"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1"></a>lazy_function <span class="ot">&lt;-</span> <span class="cf">function</span>(value, arg_never_used) {</span>
-<span id="cb78-2"><a href="#cb78-2"></a>  <span class="fu">return</span>(value <span class="sc">^</span> <span class="dv">2</span>) </span>
-<span id="cb78-3"><a href="#cb78-3"></a>}</span>
-<span id="cb78-4"><a href="#cb78-4"></a><span class="fu">lazy_function</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1"></a>lazy_function <span class="ot">&lt;-</span> <span class="cf">function</span>(value, arg_never_used) {</span>
+<span id="cb79-2"><a href="#cb79-2"></a>  <span class="fu">return</span>(value <span class="sc">^</span> <span class="dv">2</span>) </span>
+<span id="cb79-3"><a href="#cb79-3"></a>}</span>
+<span id="cb79-4"><a href="#cb79-4"></a><span class="fu">lazy_function</span>(<span class="dv">10</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 100</code></pre>
 </div>
@@ -794,8 +811,8 @@
 <p>Например, задача посчитать среднее по всем столбцам матрицы.</p>
 <p>Синтаксис: <code>apply(array, margin, function)</code>, где <code>margin</code> - измерение, по которому будет итерироваться функция <code>function</code>, 1 - это строки, 2 - столбцы.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb80"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
-<span id="cb80-2"><a href="#cb80-2"></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1"></a>M <span class="ot">&lt;-</span> <span class="fu">matrix</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="at">nrow =</span> <span class="dv">4</span>)</span>
+<span id="cb81-2"><a href="#cb81-2"></a>M</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     [,1] [,2] [,3] [,4] [,5]
 [1,]    1    5    9   13   17
@@ -808,18 +825,18 @@
 <section id="функциональное-программирование---функция-apply-1" class="slide level2">
 <h2>Функциональное программирование - функция <code>apply()</code></h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb82"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb82-1"><a href="#cb82-1"></a><span class="fu">apply</span>(M, <span class="dv">1</span>, mean) <span class="co"># подсчет среднего по строкам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1"></a><span class="fu">apply</span>(M, <span class="dv">1</span>, mean) <span class="co"># подсчет среднего по строкам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  9 10 11 12</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb84"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1"></a><span class="fu">apply</span>(M, <span class="dv">2</span>, mean) <span class="co"># подсчет среднего по столбцам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb85"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb85-1"><a href="#cb85-1"></a><span class="fu">apply</span>(M, <span class="dv">2</span>, mean) <span class="co"># подсчет среднего по столбцам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1]  2.5  6.5 10.5 14.5 18.5</code></pre>
 </div>
 </div>
 <p>Попробуем применить <code>apply()</code> к датафрейму <code>mtcars</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb86"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1"></a><span class="fu">apply</span>(mtcars, <span class="dv">2</span>, mean) <span class="co"># по столбцам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb87"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb87-1"><a href="#cb87-1"></a><span class="fu">apply</span>(mtcars, <span class="dv">2</span>, mean) <span class="co"># по столбцам</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>       mpg        cyl       disp         hp       drat         wt       qsec 
  20.090625   6.187500 230.721875 146.687500   3.596563   3.217250  17.848750 
@@ -846,8 +863,8 @@
 <p>Существует целый зоопарк сходных функций: lapply, vapply, sapply, tapply, mapply, однако на практике чаще используется <code>lapply</code>, а также функции семейства <code>map*()</code> из библиотеки <code>purrr</code>.</p>
 <p>Наиболее полезная функция <code>lapply()</code> (от слов <em>list apply</em>), которая принимает на вход вектор или лист и выполняет заданную функцию.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), </span>
-<span id="cb88-2"><a href="#cb88-2"></a>            <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>)), sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb89"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb89-1"><a href="#cb89-1"></a><span class="fu">lapply</span>(<span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), </span>
+<span id="cb89-2"><a href="#cb89-2"></a>            <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>)), sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 1.630584
@@ -864,14 +881,14 @@
 <h2>Используем свои функции в <code>apply()</code></h2>
 <p>Давайте используем нашу простую функцию, которая вычисляет моду в данных.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb90"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb90-1"><a href="#cb90-1"></a><span class="fu">apply</span>(iris, <span class="dv">2</span>, calculate_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb91"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb91-1"><a href="#cb91-1"></a><span class="fu">apply</span>(iris, <span class="dv">2</span>, calculate_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
        "5.0"        "3.0"        "1.4"        "0.2"     "setosa" </code></pre>
 </div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb92"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb92-1"><a href="#cb92-1"></a><span class="fu">lapply</span>(mtcars, calculate_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb93"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb93-1"><a href="#cb93-1"></a><span class="fu">lapply</span>(mtcars, calculate_mode)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>$mpg
 [1] 10.4
@@ -914,7 +931,7 @@ $carb
 <p>Распространенная практика использовать анонимные функции, если действие помещается в одну строчку.<br>
 Синтаксис в <code>lapply()</code> такой: <code>function(i) &lt;действие&gt;,</code> где <code>i</code> - это i-тый элемент листа, для которого выполняется действие.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb94"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb94-1"><a href="#cb94-1"></a><span class="fu">lapply</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="fu">rep</span>(i, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb95"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb95-1"><a href="#cb95-1"></a><span class="fu">lapply</span>(<span class="dv">11</span><span class="sc">:</span><span class="dv">20</span>, <span class="cf">function</span>(i) <span class="fu">rep</span>(i, <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
  [1] 11 11 11 11 11 11 11 11 11 11
@@ -952,13 +969,13 @@ $carb
 <h2>Переходим от <code>*apply()</code> -&gt; <code>purrr::map_*()</code></h2>
 <p>Часто можно встретить функцию <code>sapply()</code> (от слов <em>simplified apply</em>), которая упрощает выдачу. Однако в нынешней мете R не рекомендуется к использованию из-за непредсказуемости аутпута.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb96"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb96-1"><a href="#cb96-1"></a>sample_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>))</span>
-<span id="cb96-2"><a href="#cb96-2"></a><span class="fu">sapply</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb97"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb97-1"><a href="#cb97-1"></a>sample_list <span class="ot">&lt;-</span> <span class="fu">list</span>(<span class="fu">rnorm</span>(<span class="dv">10</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">2</span>), <span class="fu">rnorm</span>(<span class="dv">10</span>, <span class="at">sd =</span> <span class="dv">5</span>))</span>
+<span id="cb97-2"><a href="#cb97-2"></a><span class="fu">sapply</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8622293 2.4225496 3.4741834</code></pre>
 </div>
-<div class="sourceCode cell-code" id="cb98"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb98-1"><a href="#cb98-1"></a><span class="co"># сравните с lapply</span></span>
-<span id="cb98-2"><a href="#cb98-2"></a><span class="fu">lapply</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb99"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb99-1"><a href="#cb99-1"></a><span class="co"># сравните с lapply</span></span>
+<span id="cb99-2"><a href="#cb99-2"></a><span class="fu">lapply</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 0.8622293
@@ -976,8 +993,8 @@ $carb
 <p>Чтобы контролировать формат аутпута используем функции семейства <code>map_*()</code> из библиотеки <code>purrr</code>.</p>
 <p>В простом случае синтаксис <code>map()</code> не отличим от <code>lapply()</code>, аутпут всегда будет списком.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb100"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb100-1"><a href="#cb100-1"></a><span class="fu">library</span>(purrr)</span>
-<span id="cb100-2"><a href="#cb100-2"></a><span class="fu">map</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb101"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb101-1"><a href="#cb101-1"></a><span class="fu">library</span>(purrr)</span>
+<span id="cb101-2"><a href="#cb101-2"></a><span class="fu">map</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[[1]]
 [1] 0.8622293
@@ -991,7 +1008,7 @@ $carb
 </div>
 <p>Можно задать желаемый аутпут с помощью постфикса, например <code>map_chr()</code> - аутпут будет строковым вектором, <code>map_dbl()</code> - числовой вектор.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb102"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb102-1"><a href="#cb102-1"></a><span class="fu">map_dbl</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb103"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb103-1"><a href="#cb103-1"></a><span class="fu">map_dbl</span>(sample_list, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>[1] 0.8622293 2.4225496 3.4741834</code></pre>
 </div>
@@ -1007,13 +1024,13 @@ $carb
 <h2>Импорт данных в R</h2>
 <p>Загрузка таблиц:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb104"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb104-1"><a href="#cb104-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'путь/к/файлу/название_файла.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'путь/к/файлу/название_файла.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Про организацию файлов для работы рекомендую почитать <a href="R_setup.qmd">здесь</a>.</p>
 <p>Допустим, у нас лежит файл <code>wc3_units.txt</code> в директории <code>data</code>, попробуем его прочитать.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb105"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb105-1"><a href="#cb105-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'data/wc3_units.txt'</span>, <span class="at">sep =</span> <span class="st">'</span><span class="sc">\t</span><span class="st">'</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
-<span id="cb105-2"><a href="#cb105-2"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb106"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb106-1"><a href="#cb106-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'data/wc3_units.txt'</span>, <span class="at">sep =</span> <span class="st">'</span><span class="sc">\t</span><span class="st">'</span>, <span class="at">header =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb106-2"><a href="#cb106-2"></a><span class="fu">head</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>      Unit  Race Gold Wood Pop  HP Armor.Type Armor Sight Speed Time
 1  Peasant Human   75    0   1 220     Medium     0    80   190   15
@@ -1043,7 +1060,7 @@ $carb
 <h2>Посмотрим на данные</h2>
 <p>Удобно посмотреть, все ли прочитано корректно с помощью функции <code>str()</code></p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb107"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb107-1"><a href="#cb107-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb108"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb108-1"><a href="#cb108-1"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>'data.frame':   71 obs. of  21 variables:
  $ Unit         : chr  "Peasant" "Militia" "Footman" "Rifleman" ...
@@ -1075,10 +1092,10 @@ $carb
 <h2>Еще раз прочитаем, но уже правильно</h2>
 <p>Для корректного чтения используем аргумент <code>na.strings</code>, в который запишем как в нашей таблице обозначены пропущенные значения</p>
 <div>
-<div class="sourceCode cell-code" id="cb109"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb109-1"><a href="#cb109-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'data/wc3_units.txt'</span>, <span class="at">sep =</span> <span class="st">'</span><span class="sc">\t</span><span class="st">'</span>, </span>
-<span id="cb109-2"><a href="#cb109-2"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">na.strings =</span> <span class="st">'-'</span>)</span>
-<span id="cb109-3"><a href="#cb109-3"></a><span class="fu">head</span>(df)</span>
-<span id="cb109-4"><a href="#cb109-4"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb110"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb110-1"><a href="#cb110-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read.table</span>(<span class="st">'data/wc3_units.txt'</span>, <span class="at">sep =</span> <span class="st">'</span><span class="sc">\t</span><span class="st">'</span>, </span>
+<span id="cb110-2"><a href="#cb110-2"></a>                 <span class="at">header =</span> <span class="cn">TRUE</span>, <span class="at">na.strings =</span> <span class="st">'-'</span>)</span>
+<span id="cb110-3"><a href="#cb110-3"></a><span class="fu">head</span>(df)</span>
+<span id="cb110-4"><a href="#cb110-4"></a><span class="fu">str</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell quarto-layout-panel">
 <div class="quarto-layout-row quarto-layout-valign-top">
 <div class="cell-output cell-output-stdout quarto-layout-cell" style="flex-basis: 50.0%;justify-content: center;">
@@ -1137,7 +1154,7 @@ $carb
 <h2><code>summary()</code> - чтобы быстро оценить данные</h2>
 <p>Полезная функция, чтобы получить общее представление о данных.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb112"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb112-1"><a href="#cb112-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb113"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb113-1"><a href="#cb113-1"></a><span class="fu">summary</span>(df)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>     Unit               Race                Gold            Wood       
  Length:71          Length:71          Min.   : 60.0   Min.   :  0.00  
@@ -1194,7 +1211,7 @@ $carb
 <h2>Экспорт данных из R</h2>
 <p>Сохраним первые 15 строк датасета <code>mtcars</code> в файловую систему.</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb114"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb114-1"><a href="#cb114-1"></a><span class="fu">write.table</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ], <span class="st">'mtcars.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb115"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb115-1"><a href="#cb115-1"></a><span class="fu">write.table</span>(mtcars[<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, ], <span class="st">'mtcars.txt'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="спасибо-за-поддержку" class="slide level2">
