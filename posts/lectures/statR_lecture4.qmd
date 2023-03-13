@@ -1,0 +1,880 @@
+---
+title: "Язык программирования R для анализа данных: лекция 4"
+subtitle: 'Введение в tidyverse, основные функции dplyr'
+author: "Elena U"
+date: "Created on 07 March, 2023"
+execute:
+  echo: true
+  output: true
+format: 
+  revealjs:
+    slide-number: c/t
+    # mainfont: Arial
+    # fontsize: 14px
+    theme: [default, custom.scss]
+    # theme: [serif]
+    # mouse-wheel: true
+    auto-play-media: true
+    width: 1280
+    height: 720
+    # logo: figures/icg.png
+revealjs-plugins:
+  - pointer
+editor: visual
+draft: true
+---
+
+```{r}
+#| include: false
+library(kableExtra)
+```
+
+## Цель занятия
+
+Разберем наиболее важные функции `tidyverse`, в основном из пакета `dplyr`.
+
+::: columns
+::: {.column width="60%"}
+Что почитать:
+
+-   [R4DataScience](https://r4ds.had.co.nz/index.html) - книга от центрального разработчика `tidyverse` Hadley Wickham и Garrett Grolemund.
+
+-   [Анализ данных и статистика в R](https://pozdniakov.github.io/tidy_stats/index.html) (автор Иван Поздняков).
+
+-   [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/) (Hadley Wickham, Danielle Navarro, and Thomas Lin Pedersen).
+
+-   [Туториал по библиотеке `purrr`](https://github.com/cwickham/purrr-tutorial/blob/master/slides.pdf) от Charlotte Wickham
+:::
+
+::: {.column width="40%"}
+![](https://d33wubrfki0l68.cloudfront.net/b88ef926a004b0fce72b2526b0b5c4413666a4cb/24a30/cover.png){fig-align="right" width="364"}
+:::
+:::
+
+## Подходы к анализу данных в R {style="font-size: 95%"}
+
+Можно выделить три основных подхода для манипуляций с данными в R:\
+base R, `tidyverse`, `data.table`.
+
+. . .
+
+::: {style="position: absolute; top: 227px; left: 5px; width: 1270px; height: 223px; background-color: rgba(169, 209, 142, 0.3); z-index: -1; border-radius: 5px;"}
+:::
+
+. . .
+
+. . .
+
+::: {style="position: absolute; top: 450px; left: 5px; width: 1270px; height: 200px; background-color: rgba(209, 162, 142, 0.3); z-index: -1; border-radius: 5px;"}
+:::
+
+. . .
+
++-------+-----------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+|       | base R                | tidyverse                                                                                 | data.table                                                       |
++=======+=======================+===========================================================================================+==================================================================+
+| **+** | Стабильный,\          | Быстрее, чем base,\                                                                       | Лаконичный синтаксис,\                                           |
+|       | доступен по умолчанию | много источников,\                                                                        | очень быстрый,\                                                  |
+|       |                       | понятный синтаксис, использование пайпов                                                  | эффективный по памяти, нет зависимостей, обратная совместимость  |
++-------+-----------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+| **-** | Медленно работает,\   | Много зависимостей, медленнее чем `data.table`, бывают проблемы с обратной совместимостью | Лаконичный синтаксис бывает трудно расшифровать, сложнее изучать |
+|       | неуклюжий синтаксис   |                                                                                           |                                                                  |
++-------+-----------------------+-------------------------------------------------------------------------------------------+------------------------------------------------------------------+
+
+Если данных немного - рекомендую `tidyverse`, если таблицы измеряются в гигабайтах - `data.table`.
+
+## Немного контекста
+
+`tidyverse` - набор пакетов для анализа данных, объединенных сходным синтаксисом и философией. Есть ключевые пакеты (core tidyverse), есть ряд дополнительных для работы с различными данными и форматами (например библиотека `readxl` для чтения .xlsx файлов).
+
+::: callout-tip
+## Совет:
+
+Подробнее со сравнением base/tidyverse/data.table можно ознакомиться [здесь](https://mgimond.github.io/rug_2019_12/Index.html)
+:::
+
+## Core tidyverse - 8 основных пакетов
+
+::: columns
+::: {.column width="50%"}
+-   `dplyr` для манипуляций с таблицами
+
+-   `readr` для быстрого чтения и записи данных в R
+
+-   `tidyr` для приведения табличек в аккуратный вид
+
+-   `tibble` более аккуратный и быстрый вариант датафрейма
+
+-   `ggplot2` для работы с графиками
+
+-   `stringr` для работы со строками
+
+-   `purrr` для замены циклов и функций семейства `*apply()`
+
+-   `forcats` для работы с факторами
+:::
+
+::: {.column width="50%"}
+![](https://uopsych-r-bootcamp-2020.netlify.app/slides/images/tidyverse_packages.png)
+:::
+:::
+
+## Cheatsheets
+
+Для многих пакетов в `tidyverse` есть свои cheatsheets (шпаргалки) - собранные на одном листе краткие описания наиболее часто использующихся команд:
+
+-   Reading and writing: [readr](https://readr.tidyverse.org/#cheatsheet)
+
+-   Data manipulation: [dplyr](https://dplyr.tidyverse.org/#cheat-sheet)
+
+-   Tidying data: [tidyr](https://tidyr.tidyverse.org/#cheatsheet)
+
+-   Visualization: [ggplot2](https://ggplot2.tidyverse.org/#cheatsheet)
+
+-   String manipulation: [stringr](https://stringr.tidyverse.org/#cheatsheet)
+
+Лучше всего найти актуальные читшиты из самой RStudio: Help -\> Cheet Sheets (иначе можно наткнуться на устаревший читшит).
+
+## Установка tidyverse
+
+Для установки всего набора "пакета с пакетами" достаточно набрать в консоли R:
+
+```{r, eval=FALSE, echo=TRUE}
+install.packages("tidyverse")
+```
+
+Для загрузки пакета:
+
+```{r, eval=TRUE}
+#| output: true
+library(tidyverse)
+```
+
+## Философия tidyverse: основные принципы
+
+-   Использование и переиспользование уже существующих структур данных (прямоугольная таблица);
+
+-   Сочетание простых функций в конвейере (пайпы);
+
+-   Следование парадигме функционального программирования;
+
+-   Понятный и удобный дизайн функций (например, общий префикс у сходных функций).
+
+## Пайпы - основа философии tidyverse {.smaller}
+
+::: incremental
+-   Можно записать код так:\
+
+    ```{r}
+    #| eval: false
+    leave_house(get_dressed(get_out_of_bed(wake_up(me))))
+    ```
+
+-   Или создать кучу промежуточных переменных:\
+
+    ```{r}
+    #| eval: false
+    woken_up_me <- wake_up(me)
+    standing_up_me <- get_out_of_bed(woken_up_me)
+    dressed_me <- get_dressed(standing_up_me)
+    ready_me <- leave_house(dressed_me)
+    ```
+
+-   Но для большей читаемости используем:
+
+    ```{r}
+    #| eval: false
+    me %>%
+      wake_up() %>%
+      get_out_of_bed() %>%
+      get_dressed() %>%
+      leave_house()
+    ```
+:::
+
+## Пайпы - классная иллюстрация
+
+::: columns
+::: {.column width="50%"}
+```{r, out.width = "500px"}
+#| output: true
+#| echo: false
+knitr::include_graphics('figures/pipe.mp4')
+```
+:::
+
+::: {.column width="50%"}
+Без пайпов это было бы: `slice(decorate(bake(mix(ingredients))))`
+
+pipe - `%>%` в тайдиверс стиле. Горячая клавиша: Ctrl Shift M.
+
+::: {.callout-note appearance="simple"}
+С R 4.1 добавили нативный пайп `|>` (доступен без тайдиверса), однако мы будем пользоваться `%>%` этим пайпом.
+:::
+:::
+:::
+
+## dplyr - мощный пакет для преобразования таблиц
+
+Есть множество `dplyr` *глаголов* (verbs), которые позволяют сделать практически любое преобразование данных. Основными и наиболее часто использующими *глаголами* являются:
+
+-   `select()` - выбор столбцов по названию или индексу;
+-   `filter()` - выбор строк по условию;
+-   `mutate()` - создание новых колонок;
+-   `group_by()` - группировка;
+-   `summarise()` - подсчет суммарных статистик;
+-   `arrange()` - сортировка.
+
+Разберем каждый из них поподробнее.
+
+## Данные для работы
+
+Статистики по юнитам из Warcraft 3.
+
+Скачала [отсюда](https://www.unitstatistics.com/warcraft3/) и сохранила в [github](https://raw.githubusercontent.com/ubogoeva/tidyverse_tutorial/master/data/wc3_heroes.txt)-репозитории.
+
+Загрузим данные, на этот раз с использованием функции из библиотеки `readr`:
+
+```{r, echo=TRUE, warning=FALSE, message=FALSE}
+#| output: false
+#| code-line-numbers: "|3"
+wc3_units <- read_tsv('https://raw.githubusercontent.com/ubogoeva/tidyverse_tutorial/master/data/wc3_heroes.txt',
+                      col_names = TRUE, 
+                      na = '-', 
+                      name_repair = 'minimal') %>% 
+  janitor::clean_names() # для правильных названий колонок
+```
+
+-   Здесь для правильного чтения пропущенных значений используем параметр: `na = '-'`.
+
+```{=html}
+<!-- -->
+```
+-   `janitor::clean_names()` для синтаксически правильных имен колонок.
+
+## Посмотрим на данные
+
+```{r, echo=TRUE}
+#| output: true
+head(wc3_units[,1:7])
+
+```
+
+::: callout-tip
+Кстати тоже самое я обычно записываю с помощью пайпа:
+
+```{r}
+#| eval: false
+wc3_units %>% head
+```
+:::
+
+## Чем просто датафрейм отличается от тиббла?
+
+```{r}
+class(wc3_units)
+wc3_units
+```
+
+------------------------------------------------------------------------
+
+```{r}
+wc3_units_df <- read.table('data/wc3_units.txt', sep = '\t', 
+                 header = TRUE, na.strings = '-')
+wc3_units_df
+```
+
+## `select()` - выбираем нужные колонки по названию или индексу
+
+Выбрать колонку тип брони (armor_type)
+
+```{r}
+#| layout-ncol: 2
+wc3_units %>% 
+  select(armor_type)
+# также по индексу:
+wc3_units %>% 
+  select(7)
+```
+
+## `select()` - выбираем нужные колонки по названию или индексу
+
+Можно выбирать несколько колонок просто перечислением или выбрать несколько колонок с одной по другую с помощью двоеточия `:`
+
+::: columns
+::: {.column width="50%"}
+```{r}
+wc3_units %>% 
+  select(unit, race, hp)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+
+wc3_units %>% 
+  select(unit:armor_type, ground_attack:range)
+```
+:::
+:::
+
+## `select()` + `pull()` для выбора одной колонки
+
+При селекте одной колонки она не превращается в вектор по умолчанию, а остается датасетом с одной колонкой. Но иногда мы хотим извлечь именно вектор, а не маленький датасет. В таком случае понадобится функция `pull()`.
+
+Сравните:
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| output: true
+wc3_units %>% 
+  select(unit) %>% 
+  head(5)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| output: true
+wc3_units %>% 
+  pull(unit) %>% 
+  head(5)
+```
+:::
+:::
+
+------------------------------------------------------------------------
+
+В base R можно задать сохранение размерности датафрейма аргументом `drop = FALSE`
+
+```{r}
+#| layout-ncol: 2
+#| output: true
+wc3_units %>% 
+  select(unit) %>% 
+  head(5)
+# тоже самое в base R аргументом drop = fALSE
+wc3_units[1:5,1, drop = FALSE]
+```
+
+## `filter()` - выбрать нужные строки по условию
+
+Выберем только юнитов ночных эльфов ('N.Elf')
+
+```{r}
+#| output: false
+wc3_units %>% 
+  filter(race == 'N.Elf')
+
+```
+
+```{r}
+#| echo: false
+#| output: true
+kableExtra::kbl(wc3_units %>% 
+  filter(race == 'N.Elf'))
+```
+
+## Filter - выбрать нужные строки по условию {.smaller}
+
+Можно комбинировать несколько условий, используя логическое И (`&`), ИЛИ (`|`). Например, выберем только юнитов ночных эльфов, показатель урона (damage) которых больше 40:
+
+```{r}
+#| output: false
+wc3_units %>% 
+  filter(race == 'N.Elf' & damage > 40)
+```
+
+```{r}
+#| echo: false
+#| output: true
+kbl(wc3_units %>% 
+  filter(race == 'N.Elf' & damage > 40))
+```
+
+## select/filter
+
+Мнемоническое правило, чтобы не забыть, к чему относится select и filter
+
+Sele**C**t - **C**olumn
+
+Filte**R** - **R**ow
+
+![](figures/select_vs_filter.png){width="3000"}
+
+## mutate - создать новую колонку или изменить существующую
+
+Можно просто составить новую колонку из предыдущих, используя синтаксис `mutate(column_name = <expression>).`
+
+Проверим, что dps (damage per second) = damage / cooldown
+
+```{r}
+#| output-location: slide
+#| output: true
+wc3_units %>% 
+  mutate(damage_per_second = damage / cooldown) %>% 
+  select(unit, damage, cooldown, damage_per_second, dps)
+```
+
+## Mutate - создать новую колонку или изменить существующую
+
+Узнаем показатель отношения dps / на число пищи
+
+```{r}
+#| output: false
+dps_food <- wc3_units %>% 
+  mutate(dps_food_ratio = dps / pop) %>% 
+  relocate(dps_food_ratio, .after = unit)
+```
+
+```{r}
+#| output: true
+#| echo: false
+kbl(dps_food) %>% 
+  kable_styling(bootstrap_options = "striped", font_size = 28, 
+                  position = "left", full_width = FALSE)
+```
+
+## Mutate с условием
+
+Часто нужно заполнить новую колонку определенными значениями в зависимости от условия.
+
+Допустим, мы хотим разделить юнитов по принципу, являются ли они призванными (число пищи `pop` равно `0` или `NA`).
+
+```{r}
+set.seed(1) # для воспроизводимости семплирования 5 строчек
+wc3_units_summon <- wc3_units %>% 
+  mutate(is_summon = (pop == 0) | is.na(pop)) %>% 
+  select(unit, race, pop, is_summon) %>% slice_sample(n = 5)
+```
+
+```{r, fig.align='left'}
+#| echo: false
+#| output: true
+kbl(wc3_units_summon) %>% 
+    kable_styling(bootstrap_options = "striped", font_size = 28, 
+                  position = "left", full_width = FALSE)
+```
+
+## Mutate с условием для существующей колонки
+
+Например, переименовать N.Elf в NightElfes
+
+```{r}
+wc3_units %>% 
+  mutate(race = str_replace(race, 'N.Elf', 'NightElfes')) %>% 
+  slice_sample(n = 8)
+```
+
+## Mutate + if_else
+
+В качестве примера `if_else()` проверка, является ли число положительным или отрицательным
+
+```{r}
+#| output: true
+number <- c(-3, -1, 0, 2, 5)
+if_else(number > 0, 'Положительное число', 
+        'Отрицательное число или ноль')
+```
+
+Синтаксис `if_else`: `(<условие>, выражение если TRUE, выражение если FALSE)`.
+
+::: callout-note
+Функция `if()` в R является невекторизованной, то есть с помощью `if()` можно сравнивать только одно значение, а не целый вектор.
+:::
+
+## Mutate + if_else
+
+```{r}
+#| output: true
+wc3_units_summon_ifelse <- wc3_units %>% 
+  mutate(if_summon = if_else((pop == 0) | is.na(pop), 
+                            'Призванные', 'Непризванные'))
+kbl(wc3_units_summon_ifelse %>% 
+      select(unit, race, pop, if_summon) %>% 
+      slice_sample(n = 5))
+```
+
+## Mutate с условием + case_when
+
+Если нужно использовать более чем 1 условие, то рекомендую воспользоваться функцией `case_when()` из библиотеки dplyr.
+
+```{r}
+#| output: true
+dplyr::case_when(
+  number > 0 ~ "Положительное число",
+  number < 0 ~ "Отрицательное число",
+  number == 0 ~ "Ноль")
+```
+
+## `Mutate` с условием + `case_when`
+
+Пример с `mutate()` + `case_when()` не придумала для wc3 датасета
+
+```{r}
+#| output: true
+tibble(number = c(-3, -1, 0, 2, 5)) %>% 
+  mutate(is_plus = case_when(number > 0 ~ "Положительное число",
+  number < 0 ~ "Отрицательное число",
+  number == 0 ~ "Ноль"))
+```
+
+## Group_by + summarise связка
+
+```{r}
+wc3_units %>% 
+  group_by(race) %>% 
+  summarise(median_damage = median(damage, na.rm = TRUE))
+
+# Можно сразу собирать несколько средних:
+wc3_units %>% 
+  group_by(race) %>% 
+  summarise(median_damage = median(damage, na.rm = TRUE, 
+            median_hp = median(hp, na.rm = TRUE)))
+
+```
+
+## Group_by + summarise связка
+
+[![Data Wrangling with dplyr and tidyr](https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.4.0/images/group_summary.png)](https://moderndive.github.io/moderndive_labs/static/previous_versions/v0.4.0/5-wrangling.html#groupby)
+
+## `Across` + `summarise` - для быстрого вычисления описательных статистик
+
+Например, задача посчитать медиану для всех числовых переменных в датасете `wc3_units`
+
+```{r, include=FALSE}
+wc3_units_summon <- wc3_units %>% 
+  mutate(is_summon = (pop == 0) | is.na(pop))
+```
+
+```{r}
+#| output: true
+knitr::kable(wc3_units_summon %>%
+  filter(!is_summon) %>% # чтобы анализировать только не-призванных юнитов
+  group_by(race) %>% 
+  summarise(across(where(is.numeric), 
+                   .fns = ~median(.x, na.rm = TRUE))))
+```
+
+------------------------------------------------------------------------
+
+Или пример попроще:
+
+```{r}
+#| output: true
+#| output-location: default
+knitr::kable(iris %>% 
+  summarise(across(where(is.numeric), 
+                   list(mean = mean, sd = sd))))
+```
+
+На самом деле здесь я бы скорее перевела данные в long format и потом уже считала статистики, но идея должна быть понятна.
+
+## Across + mutate
+
+Это очень актуальная вещь при работе с транскриптомными данными. Например заменить logFC, которые не `NA` и не ноль на 1. Создадим пример таблицы:
+
+```{r}
+#| output: true
+gene_table <- tibble(id = paste0('gene', 1:8), 
+                     logFC_df1 = sample(c(0, runif(6, min = -5, max = 5), NA), 8),
+                     FDR_df1 = sample(c(runif(6, 10^-50, 1), 0.01, 0.0005), 8),
+                     logFC_df2 = sample(c(0, runif(6, min = -5, max = 5), NA), 8),
+                     FDR_df2 = sample(c(runif(6, 10^-50, 1), 0.001, 0.03), 8))
+gene_table
+```
+
+## Across + mutate {.smaller}
+
+Теперь заменим:
+
+```{r}
+#| output: true
+gene_table %>% 
+  mutate(across(starts_with('logFC'), 
+                .fns = ~if_else(.x == 0 | is.na(.x), 0, 1)))
+
+```
+
+Еще нередко возникает задача например занулить все незначимые по FDR значения logFC для каждого датасета, но это лучше сделать, используя перевод данных из широкого в длинный формат и обратно.
+
+## Arrange - сортировка
+
+```{r}
+n_elf_dm40 <-  wc3_units %>% 
+  filter(race == 'N.Elf' & damage > 40) %>% 
+  select(unit:race, ground_attack:damage) %>% 
+  arrange(damage)
+```
+
+```{r}
+#| output: true
+#| echo: false
+knitr::kable(n_elf_dm40)
+```
+
+`desc()` - для сортировки по убыванию.
+
+Как думаете, есть ли преимущество относительно базовой функции `order()` или `sort()`, в которой есть параметр `decreasing = TRUE`?
+
+## slice - выбираем строки по индексу
+
+`slice()` - вывести строки в опреденном диапазоне (используя просто индексы строк)
+
+```{r}
+wc3_units %>% 
+  slice(10:15)
+```
+
+`slice_max()` - вывести максимальные значения по какому-то признаку
+
+```{r}
+#| output: true
+wc3_units %>% 
+  slice_max(wood, n = 5) %>% # важно эксплицитно писать параметр n = 
+  select(unit, race, wood)
+```
+
+## slice_max, slice_min
+
+`slice_min()` - вывести минимальные значения по какому-то признаку
+
+```{r}
+#| output: true
+wc3_units %>% 
+  slice_min(hp, n = 5) %>% 
+  select(unit, race, hp)
+
+```
+
+::: callout-note
+Функции `slice_max/slice_min()` сортируют выдачу, в отличие от теперь устаревшей `top_n()`
+:::
+
+## Другие функции: count
+
+`count()` - для удобного подсчета количества элементов по категориям. Можно выводить по нескольким категориям сразу
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| output: true
+wc3_units %>% 
+  count(race)
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| output: true
+wc3_units %>% 
+  count(race, ground_attack)
+```
+:::
+:::
+
+Как думаете, для чего это может быть полезно?
+
+## Pivot_longer / pivot_wider - конвертация таблиц
+
+Это функции из пакета `tidyr` для перевода датафрейма в длинный или широкий формат.
+
+Использую очень часто в процессе статистической обработки экспериментальных данных. Например,
+
+```{r}
+#| output: true
+#| output-location: default
+df <- tibble(attached = sample(5:6, 10, replace = TRUE), 
+             detached = sample(c(2,3,4), 10, replace = TRUE),
+             genotype = 'Col0')
+df
+```
+
+## Pivot_longer
+
+В простейшем случае синтаксис pivot_longer: `cols` = колонки, которые необходимо трансформировать. Можно добавить параметры `names_to` и `values_to`, которые добавят имена вновь возданным колонкам.
+
+```{r}
+#| output: true
+(df_long <- df %>% 
+    mutate(id = row_number()) %>% 
+    pivot_longer(cols = attached:detached))
+```
+
+## Pivot_longer
+
+::: columns
+::: {.column width="50%"}
+![](figures/sandwich_pivot.PNG){width="1500"}
+:::
+
+::: {.column width="50%"}
+Для выбора колонок можно использовать концепт `tidy-select`-а.
+
+Лучше всего еще перед трансформацией создать колонку с id каждого наблюдения.
+
+Длинный формат более удобен для проведения дисперсионного анализа, построения графиков.
+:::
+:::
+
+## Pivot_wider
+
+Нередко нужно вернуть обратно таблицу в широкий формат
+
+Например так:
+
+```{r}
+#| output: true
+df_long %>% 
+  pivot_wider(id_cols = c(genotype, id), 
+              names_from = name, values_from = value)
+
+```
+
+## Теперь как занулить все незначимые фолды
+
+Вернемся к таблице gene_table. Задача превратить в ноль все фолды, для которых `FDR > 0.05`. Используем сразу несколько подходов к манипуляции с таблицами
+
+```{r}
+#| output: true
+gene_table %>% 
+  pivot_longer(cols = where(is.numeric), names_pattern = "(.*)_(.*)",
+               names_to = c('.value', 'dataset')) %>% 
+  mutate(logFC = if_else(FDR < 0.05, logFC, 0)) %>% 
+  pivot_wider(id_cols = id, names_from = dataset, 
+              values_from = c(logFC, FDR), names_vary = 'slowest') 
+
+```
+
+## Join
+
+Часто необходим для объединения сходных табличек.
+
+-   `inner_join()` - объединяет только общие строки в обеих таблицах;
+
+-   `full_join()` - объединяет все строки в обеих таблицах;
+
+<!-- -->
+
+-   `left_join()` - все строки из первой таблицы и те строки из второй, которые есть в первой;
+
+-   `right_join()` - принцип как у `left_join`, только наоборот (используется редко).
+
+![](https://d33wubrfki0l68.cloudfront.net/aeab386461820b029b7e7606ccff1286f623bae1/ef0d4/diagrams/join-venn.png)
+
+## Join - пример {.smaller}
+
+Например, нужно объединить результаты анализа дифференциальной экспрессии данных микрочипов и RNA-seq.
+
+```{r}
+df1 <- tibble(id = paste0('gene', 1:6), logFC_df1 = runif(6, -5, 5),
+              FDR_df1 = runif(6, 0.000001, 1))
+df2 <- tibble(id = paste0('gene', 3:8), logFC_df2 = runif(6, -5, 5),
+              FDR_df2 = runif(6, 0.000001, 1))
+```
+
+::: columns
+::: {.column width="50%"}
+```{r}
+#| output: true
+df1
+```
+:::
+
+::: {.column width="50%"}
+```{r}
+#| output: true
+df2
+```
+:::
+:::
+
+Есть общие айди генов, есть уникальные в каждом датасете. Какой вид джойна подойдет в этом случае?
+
+## Join - продолжение
+
+Я обычно использую `full_join`, потому что не хочу терять какую-либо информацию о данных.
+
+```{r}
+#| output: true
+full_join(df1, df2, by = 'id')
+```
+
+Если столбцы `id`, по которым будет проходить джойн неодинаковые, можно задать например так: `full_join(df1, df2, by = c('gene_id' = 'id'))`
+
+## Считывание данных в формате Excel
+
+Библиотека `readxl`
+
+```{r}
+#| eval: false
+library(readxl)
+df <- read_xlsx('table_of_NA.xlsx', sheet = 'Sheet1')
+```
+
+## Заключение {style="font-size: 90%"}
+
+Мы прошли основные функции для преобразования таблиц.
+
+::: columns
+::: {.column width="50%"}
+-   Для работы с колонками:
+
+    -   `select` - выбрать несколько колонок и `pull`- выбрать одну колонку как вектор
+
+    -   `mutate` - изменить колонку/и
+
+    -   `across` в связке с `mutate` и `summarise`
+
+    -   `case_when` - аналог `if_else` для нескольких условий
+
+    -   `arrange` - сортировка по какой-либо колонке
+:::
+
+::: {.column width="50%"}
+-   Для работы со строками:
+
+    -   `count` - посчитать количество наблюдений по группам
+
+    -   `filter` - выбрать строки по условию
+
+    -   `slice` (выбрать строки по индексу) и его товарищи:
+
+        -   `slice_max`, `slice_min` отобрать наибольшие/наименьшие значения по какой-либо переменной
+
+        -   `slice_sample` случайно выбрать несколько строк из датасета
+:::
+:::
+
+------------------------------------------------------------------------
+
+Для работы со всей таблицей целиком:
+
+-   `group_by`
+
+-   `summarise`
+
+-   `pivot_longer` / `pivot_wider`
+
+-   `full_join`, `inner_join`, `left_join`
+
+## Вопросы?
+
+::: columns
+::: {.column width="40%"}
+Презентация сделана целиком в R, используя [quarto](https://quarto.org/)
+
+![](images/paste-6E046C96.png)
+
+Подписывайтесь на телеграм-канал: [Статистика и R](https://t.me/stats_for_science)
+
+![](images/paste-78E5F205.png){width="259"}
+:::
+
+::: {.column width="50%"}
+А еще мы заказывали значки и стикеры с `tidyverse` в RStudio office
+
+![](images/paste-078A24F8.png){width="570"}
+:::
+:::
