@@ -1831,12 +1831,12 @@ base R, <code>tidyverse</code>, <code>data.table</code>.</p>
 <pre><code># A tibble: 6 × 21
   unit     race   gold  wood   pop    hp armor…¹ armor sight speed  time groun…²
   &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
-1 Kodo Be… Orc     255    60     4  1000 Unarmo…     1   140   220    30 Pierce 
-2 DoC Dru… N.Elf   255    80     4   130 Heavy       1   140   270    35 Normal 
-3 Avatar … N.Elf    NA    NA    NA  1200 Heavy       2   120   320    NA Normal 
-4 Peon     Orc      75     0     1   250 Medium      0    80   190    15 Normal 
-5 Spirit … Orc      NA    NA    NA   200 Heavy       0   120   320    NA Normal 
-6 Skeleta… Unde…    NA    NA     0   230 Medium      0   140   270    NA Pierce 
+1 DoC Dru… N.Elf   255    80     4   130 Heavy       1   140   270    35 Normal 
+2 Faerie … N.Elf   155    25     2   450 Light       0   160   350    25 Pierce 
+3 Grunt    Orc     200     0     3   700 Heavy       1   140   270    30 Normal 
+4 Footman  Human   135     0     2   420 Heavy       2   140   270    20 Normal 
+5 Dryad    N.Elf   145    60     3   435 Unarmo…     0   140   350    30 Pierce 
+6 Mortar … Human   180    70     3   360 Heavy       0   140   270    40 Siege  
 # … with 9 more variables: damage &lt;dbl&gt;, cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
 #   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
 #   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
@@ -4300,22 +4300,22 @@ base R, <code>tidyverse</code>, <code>data.table</code>.</p>
 <p>Например так:</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb88"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb88-1"><a href="#cb88-1"></a>iris_long <span class="sc">%&gt;%</span> </span>
-<span id="cb88-2"><a href="#cb88-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(id), </span>
+<span id="cb88-2"><a href="#cb88-2"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> <span class="fu">c</span>(id, Species), </span>
 <span id="cb88-3"><a href="#cb88-3"></a>              <span class="at">names_from =</span> name, <span class="at">values_from =</span> value)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 150 × 5
-   id    Sepal.Length Sepal.Width Petal.Length Petal.Width
-   &lt;chr&gt;        &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
- 1 1              5.1         3.5          1.4         0.2
- 2 2              4.9         3            1.4         0.2
- 3 3              4.7         3.2          1.3         0.2
- 4 4              4.6         3.1          1.5         0.2
- 5 5              5           3.6          1.4         0.2
- 6 6              5.4         3.9          1.7         0.4
- 7 7              4.6         3.4          1.4         0.3
- 8 8              5           3.4          1.5         0.2
- 9 9              4.4         2.9          1.4         0.2
-10 10             4.9         3.1          1.5         0.1
+<pre><code># A tibble: 150 × 6
+   id    Species Sepal.Length Sepal.Width Petal.Length Petal.Width
+   &lt;chr&gt; &lt;fct&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt;
+ 1 1     setosa           5.1         3.5          1.4         0.2
+ 2 2     setosa           4.9         3            1.4         0.2
+ 3 3     setosa           4.7         3.2          1.3         0.2
+ 4 4     setosa           4.6         3.1          1.5         0.2
+ 5 5     setosa           5           3.6          1.4         0.2
+ 6 6     setosa           5.4         3.9          1.7         0.4
+ 7 7     setosa           4.6         3.4          1.4         0.3
+ 8 8     setosa           5           3.4          1.5         0.2
+ 9 9     setosa           4.4         2.9          1.4         0.2
+10 10    setosa           4.9         3.1          1.5         0.1
 # … with 140 more rows</code></pre>
 </div>
 </div>
