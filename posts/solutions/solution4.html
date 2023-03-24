@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.2.269">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Elena U">
+<meta name="dcterms.date" content="2023-03-24">
+
+<title>Rcourse_NSU - Решения по четвертой лекции</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { color: #008000; } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { color: #008000; font-weight: bold; } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<script src="../../site_libs/quarto-html/quarto.js"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit"
+  }
+}</script>
+
+
+<link rel="stylesheet" href="../../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg navbar-dark ">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="../../index.html">
+    <span class="navbar-title">Rcourse_NSU</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../../about.html">
+ <span class="menu-text">Обо мне</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/ubogoeva"><i class="bi bi-github" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://t.me/stats_for_science"><i class="bi bi-telegram" role="img">
+</i> 
+ <span class="menu-text"></span></a>
+  </li>  
+</ul>
+              <div id="quarto-search" class="" title="Search"></div>
+          </div> <!-- /navcollapse -->
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">Решения по четвертой лекции</h1>
+                                <div class="quarto-categories">
+                <div class="quarto-category">task</div>
+              </div>
+                  </div>
+  </div>
+    
+  
+  <div class="quarto-title-meta">
+
+      <div>
+      <div class="quarto-title-meta-heading">Author</div>
+      <div class="quarto-title-meta-contents">
+               <p>Elena U </p>
+            </div>
+    </div>
+      
+      <div>
+      <div class="quarto-title-meta-heading">Published</div>
+      <div class="quarto-title-meta-contents">
+        <p class="date">March 24, 2023</p>
+      </div>
+    </div>
+    
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content quarto-banner-title-block" id="quarto-document-content">
+
+
+
+
+<p>Составлены в формате задание - ответ к нему.</p>
+<p>Рассчитано на самопроверку: ваша задача написать такой код, чтобы совпал с моим правильным ответом. Плюс есть еще несколько заданий на подумать и вспомнить материал лекции.</p>
+<p><strong>Не стесняйтесь гуглить</strong>, это необходимо для решения многих задач в программировании, которые могут встретиться в реальной жизни.</p>
+<p>Если вдруг найдутся ошибки/опечатки, пишите на почту <code>e.ubogoeva@alumni.nsu.ru</code> или в телеграм. Вопросы по заданиям также можно писать на почту или в телеграм, телеграм чуть предпочтительнее.</p>
+<section id="установка-tidyverse" class="level2">
+<h2 class="anchored" data-anchor-id="установка-tidyverse">Установка <code>tidyverse</code></h2>
+<p>Сначала необходимо установить и загрузить <code>tidyverse</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">'tidyverse'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="работа-с-пайпами" class="level2">
+<h2 class="anchored" data-anchor-id="работа-с-пайпами">Работа с пайпами</h2>
+<p>Перепишите следующие выражения с помощью пайпа <code>%&gt;%</code>:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sin</span>(<span class="fu">log</span>(<span class="fu">sqrt</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">10</span>), <span class="dv">10</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1] 0.0000000 0.1499473 0.2363043 0.2965040 0.3424140 0.3793333 0.4100866
+ [8] 0.4363562 0.4592238 0.4794255</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">c</span>(<span class="st">"Корень из"</span>, <span class="dv">2</span>, <span class="st">"равен"</span>, <span class="fu">sqrt</span>(<span class="dv">2</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Корень из"       "2"               "равен"           "1.4142135623731"</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span> <span class="sc">%&gt;%</span> </span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">c</span>(<span class="st">"Корень из"</span>, ., <span class="st">"равен"</span>, <span class="fu">sqrt</span>(.))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "Корень из"       "2"               "равен"           "1.4142135623731"</code></pre>
+</div>
+</div>
+</section>
+<section id="работа-со-столбцами-dplyrselect" class="level2">
+<h2 class="anchored" data-anchor-id="работа-со-столбцами-dplyrselect">Работа со столбцами <code>dplyr::select()</code></h2>
+<p>Загрузка данных:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">'https://raw.githubusercontent.com/ubogoeva/tidyverse_tutorial/master/data/wc3_heroes.txt'</span>,</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                      <span class="at">col_names =</span> <span class="cn">TRUE</span>, </span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>                      <span class="at">na =</span> <span class="st">'-'</span>, </span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>                      <span class="at">name_repair =</span> <span class="st">'minimal'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li><p>Выберите столбец <code>hp</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 1
+      hp
+   &lt;dbl&gt;
+ 1   220
+ 2   220
+ 3   420
+ 4   535
+ 5   835
+ 6   290
+ 7   325
+ 8   600
+ 9   200
+10   360
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+<li><p>Выберите столбцы <code>unit</code>, <code>race</code>, <code>gold</code>, <code>armor</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit, race, gold, armor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 4
+   unit           race   gold armor
+   &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1 Peasant        Human    75     0
+ 2 Militia        Human    NA     4
+ 3 Footman        Human   135     2
+ 4 Rifleman       Human   205     0
+ 5 Knight         Human   245     5
+ 6 Priest         Human   135     0
+ 7 Sorceress      Human   155     0
+ 8 Spell Breaker  Human   215     3
+ 9 Flying Machine Human    90     2
+10 Mortar Team    Human   180     0
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+<li><p>Выберите столбцы с <code>hp</code> по <code>sight</code>, и с <code>cooldown</code> по <code>range</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(hp<span class="sc">:</span>sight, cooldown<span class="sc">:</span>range)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 7
+      hp armor_type armor sight cooldown   dps range
+   &lt;dbl&gt; &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
+ 1   220 Medium         0    80     2     2.75     0
+ 2   220 Heavy          4   140     1.2  10.4      0
+ 3   420 Heavy          2   140     1.35  9.26     0
+ 4   535 Medium         0   140     1.5  14       40
+ 5   835 Heavy          5   140     1.4  24.3      0
+ 6   290 Unarmored      0   140     2     4.25    60
+ 7   325 Unarmored      0   140     1.75  6.29    60
+ 8   600 Medium         3   140     1.9   7.37    25
+ 9   200 Heavy          2   180     2.5   3        0
+10   360 Heavy          0   140     3.5  16.6    115
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+<li><p>Выведите столбец <code>gold</code> в качестве вектора</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pull</span>(gold)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  75  NA 135 205 245 135 155 215  90 180 195 280 200  NA  NA  NA  NA  75 200
+[20] 135 135 220 180 280 130 145 195 255 265 160  NA  NA  NA  NA  60 130 195 210
+[39] 145 255  NA 425 425 160 135  NA 155  NA 330 330  NA  NA  NA  75 120 215 185
+[58] 240 230 145 155 385  NA  NA  NA  NA  NA  NA  NA 200  NA</code></pre>
+</div>
+</div></li>
+<li><p>Выведите все столбцы кроме первого <code>unit</code> (отрицательная индексация с помощью <code>!</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">!</span>unit)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 20
+   race   gold  wood   pop    hp armor_…¹ armor sight speed  time groun…² damage
+   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;    &lt;dbl&gt;
+ 1 Human    75     0     1   220 Medium       0    80   190    15 Normal     5.5
+ 2 Human    NA    NA     1   220 Heavy        4   140   270    NA Normal    12.5
+ 3 Human   135     0     2   420 Heavy        2   140   270    20 Normal    12.5
+ 4 Human   205    30     3   535 Medium       0   140   270    26 Pierce    21  
+ 5 Human   245    60     4   835 Heavy        5   140   350    45 Normal    34  
+ 6 Human   135    10     2   290 Unarmor…     0   140   270    28 Magic      8.5
+ 7 Human   155    20     2   325 Unarmor…     0   140   270    30 Magic     11  
+ 8 Human   215    30     3   600 Medium       3   140   300    28 Normal    14  
+ 9 Human    90    30     1   200 Heavy        2   180   400    13 Siege      7.5
+10 Human   180    70     3   360 Heavy        0   140   270    40 Siege     58  
+# … with 61 more rows, 8 more variables: cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
+#   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
+#   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
+#   ²​ground_attack</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="работа-со-строками-dplyrfilter-dplyrslice" class="level2">
+<h2 class="anchored" data-anchor-id="работа-со-строками-dplyrfilter-dplyrslice">Работа со строками <code>dplyr::filter()</code>, <code>dplyr::slice()</code></h2>
+<ul>
+<li>Выберите юнитов, показатель здоровья <code>hp</code> которых больше 950</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(hp <span class="sc">&gt;</span> <span class="dv">950</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 21
+   unit    race   gold  wood   pop    hp armor…¹ armor sight speed  time groun…²
+   &lt;chr&gt;   &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
+ 1 Phoenix Human    NA    NA    NA  1250 Light       1   160   320    NA Magic  
+ 2 Tauren  Orc     280    80     5  1300 Heavy       3   140   270    44 Normal 
+ 3 Kodo B… Orc     255    60     4  1000 Unarmo…     1   140   220    30 Pierce 
+ 4 DoC Be… N.Elf    NA    NA     4   960 Heavy       3   140   270    NA Normal 
+ 5 Mounta… N.Elf   425   100     7  1600 Medium      4   120   270    45 Normal 
+ 6 Mounta… N.Elf   425   100     7  1600 Medium     10   120   270    45 Siege  
+ 7 Chimae… N.Elf   330    70     5  1000 Light       2   160   250    65 Magic  
+ 8 Chimae… N.Elf   330    70     5  1000 Light       2   160   250    65 Siege  
+ 9 Avatar… N.Elf    NA    NA    NA  1200 Heavy       2   120   320    NA Normal 
+10 Abomin… Unde…   240    70     4  1175 Heavy       2   140   270    40 Normal 
+11 Frost … Unde…   385   120     7  1350 Light       1   160   270    65 Magic  
+12 Infern… Unde…    NA    NA    NA  1500 Heavy       6   140   320    NA Chaos  
+# … with 9 more variables: damage &lt;dbl&gt;, cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
+#   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
+#   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
+#   ²​ground_attack</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Выберите юнитов орков (<code>Orc</code>) с легким (<code>Light</code>) типом брони (<code>armor_type</code>)</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">==</span> <span class="st">'Orc'</span> <span class="sc">&amp;</span> armor_type <span class="sc">==</span> <span class="st">'Light'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 21
+  unit     race   gold  wood   pop    hp armor…¹ armor sight speed  time groun…²
+  &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
+1 Wind Ri… Orc     265    40     4   570 Light       0   160   320    35 Pierce 
+2 Troll B… Orc     160    40     2   325 Light       0   140   320    28 Siege  
+# … with 9 more variables: damage &lt;dbl&gt;, cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
+#   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
+#   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
+#   ²​ground_attack</code></pre>
+</div>
+</div></li>
+<li><p>Выведите первые 6 юнитов <code>Undead</code> с максимальным показателем затраченного дерева (<code>wood</code>).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">==</span> <span class="st">'Undead'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(wood, <span class="at">n =</span> <span class="dv">6</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 7 × 21
+  unit     race   gold  wood   pop    hp armor…¹ armor sight speed  time groun…²
+  &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
+1 Frost W… Unde…   385   120     7  1350 Light       1   160   270    65 Magic  
+2 Abomina… Unde…   240    70     4  1175 Heavy       2   140   270    40 Normal 
+3 Meat Wa… Unde…   230    50     4   380 Heavy       2   140   220    45 Siege  
+4 Crypt F… Unde…   215    40     3   550 Medium      0   140   270    30 Pierce 
+5 Obsidia… Unde…   200    35     3   550 Heavy       4   120   270    45 Magic  
+6 Gargoyle Unde…   185    30     2   410 Unarmo…     3   160   350    35 Pierce 
+7 Banshee  Unde…   155    30     2   285 Unarmo…     0   140   270    28 Magic  
+# … with 9 more variables: damage &lt;dbl&gt;, cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
+#   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
+#   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
+#   ²​ground_attack</code></pre>
+</div>
+</div>
+<blockquote class="blockquote">
+<p>Хм, почему-то вывелось 7 строчек. Почему это произошло, можно узнать, прочитав справку функции <code>slice_max()</code> (аргумент <code>with_ties</code>).</p>
+</blockquote></li>
+<li><p>Попробуем вывести только 6 строчек в предыдущем задании.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(race <span class="sc">==</span> <span class="st">'Undead'</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_max</span>(wood, <span class="at">n =</span> <span class="dv">6</span>, <span class="at">with_ties =</span> <span class="cn">FALSE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 21
+  unit     race   gold  wood   pop    hp armor…¹ armor sight speed  time groun…²
+  &lt;chr&gt;    &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
+1 Frost W… Unde…   385   120     7  1350 Light       1   160   270    65 Magic  
+2 Abomina… Unde…   240    70     4  1175 Heavy       2   140   270    40 Normal 
+3 Meat Wa… Unde…   230    50     4   380 Heavy       2   140   220    45 Siege  
+4 Crypt F… Unde…   215    40     3   550 Medium      0   140   270    30 Pierce 
+5 Obsidia… Unde…   200    35     3   550 Heavy       4   120   270    45 Magic  
+6 Gargoyle Unde…   185    30     2   410 Unarmo…     3   160   350    35 Pierce 
+# … with 9 more variables: damage &lt;dbl&gt;, cooldown &lt;dbl&gt;, dps &lt;dbl&gt;,
+#   range &lt;dbl&gt;, air_attack &lt;chr&gt;, damage_2 &lt;dbl&gt;, cooldown_2 &lt;dbl&gt;,
+#   dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable names ¹​armor_type,
+#   ²​ground_attack</code></pre>
+</div>
+</div></li>
+</ul>
+<p>Но вообще лучше сохранять дефолтное значение параметра <code>with_ties</code></p>
+</section>
+<section id="создание-колонок-dplyrmutate" class="level2">
+<h2 class="anchored" data-anchor-id="создание-колонок-dplyrmutate">Создание колонок <code>dplyr::mutate()</code></h2>
+<ul>
+<li><p>Создайте новую колонку <code>is_air_attack</code>, которая будет заполнена <code>TRUE</code>, если у юнита есть воздушная атака (<code>air_attack</code>), и <code>FALSE</code>, если нет. Выведите на печать колонки <code>unit</code>, <code>race</code>, <code>air_attack</code> и <code>is_air_attack</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">is_air_attack =</span> <span class="sc">!</span><span class="fu">is.na</span>(air_attack)) <span class="sc">%&gt;%</span> </span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit, race, air_attack, is_air_attack)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 4
+   unit           race  air_attack is_air_attack
+   &lt;chr&gt;          &lt;chr&gt; &lt;chr&gt;      &lt;lgl&gt;        
+ 1 Peasant        Human &lt;NA&gt;       FALSE        
+ 2 Militia        Human &lt;NA&gt;       FALSE        
+ 3 Footman        Human &lt;NA&gt;       FALSE        
+ 4 Rifleman       Human Pierce     TRUE         
+ 5 Knight         Human &lt;NA&gt;       FALSE        
+ 6 Priest         Human Magic      TRUE         
+ 7 Sorceress      Human Magic      TRUE         
+ 8 Spell Breaker  Human &lt;NA&gt;       FALSE        
+ 9 Flying Machine Human Pierce     TRUE         
+10 Mortar Team    Human &lt;NA&gt;       FALSE        
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+<li><p>Создайте колонку <code>how_fast</code>, заполненную значениями: если скорость <code>speed</code> больше 270 - fast, равно 270 - middle, меньше 270 - slow. Выведите на печать колонки <code>unit</code>, <code>race</code>, <code>speed</code>, <code>how_fast</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">how_fast =</span> <span class="fu">case_when</span>(speed <span class="sc">&gt;</span> <span class="dv">270</span> <span class="sc">~</span> <span class="st">'fast'</span>,</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>                              speed <span class="sc">==</span> <span class="dv">270</span> <span class="sc">~</span> <span class="st">'middle'</span>,</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>                              <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">'slow'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit, race, speed, how_fast)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 4
+   unit           race  speed how_fast
+   &lt;chr&gt;          &lt;chr&gt; &lt;dbl&gt; &lt;chr&gt;   
+ 1 Peasant        Human   190 slow    
+ 2 Militia        Human   270 middle  
+ 3 Footman        Human   270 middle  
+ 4 Rifleman       Human   270 middle  
+ 5 Knight         Human   350 fast    
+ 6 Priest         Human   270 middle  
+ 7 Sorceress      Human   270 middle  
+ 8 Spell Breaker  Human   300 fast    
+ 9 Flying Machine Human   400 fast    
+10 Mortar Team    Human   270 middle  
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="сортировка-dplyrarrange" class="level2">
+<h2 class="anchored" data-anchor-id="сортировка-dplyrarrange">Сортировка <code>dplyr::arrange()</code></h2>
+<ul>
+<li>Отсортируйте колонку <code>dps</code> по убыванию, выберите колонки <code>unit</code>, <code>race</code>, <code>damage</code>, <code>cooldown</code>, <code>dps</code>.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(dps)) <span class="sc">%&gt;%</span> </span>
+<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit, race, damage, cooldown, dps)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 5
+   unit              race   damage cooldown   dps
+   &lt;chr&gt;             &lt;chr&gt;   &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt;
+ 1 Phoenix           Human    68       1.4   48.6
+ 2 Infernal          Undead   54.5     1.35  40.4
+ 3 Frost Wyrm        Undead  104       3     34.7
+ 4 Water Elemental 3 Human    45       1.5   30  
+ 5 Chimaera          N.Elf    75       2.5   30  
+ 6 DoC Bear Form     N.Elf    36.5     1.5   24.3
+ 7 Knight            Human    34       1.4   24.3
+ 8 Siege Engine      Human    50       2.1   23.8
+ 9 Water Elemental 2 Human    35       1.5   23.3
+10 Gryphon Rider     Human    50       2.2   22.7
+# … with 61 more rows</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Отсортируйте колонку <code>hp</code> по возрастанию, <code>armor</code> по убыванию, выберите <code>unit</code>, <code>race</code>, <code>hp</code>, <code>armor</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(hp, <span class="fu">desc</span>(armor)) <span class="sc">%&gt;%</span> </span>
+<span id="cb33-3"><a href="#cb33-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(unit, race, hp, armor)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 71 × 4
+   unit             race      hp armor
+   &lt;chr&gt;            &lt;chr&gt;  &lt;dbl&gt; &lt;dbl&gt;
+ 1 Serpent Ward     Orc       75     0
+ 2 Wisp             N.Elf    120     0
+ 3 Shade            Undead   125     0
+ 4 DoC Druid Form   N.Elf    130     1
+ 5 Carrion Beetle 1 Undead   140     2
+ 6 Skeleton Warrior Undead   180     1
+ 7 Flying Machine   Human    200     2
+ 8 Spirit Wolf      Orc      200     0
+ 9 Militia          Human    220     4
+10 Peasant          Human    220     0
+# … with 61 more rows</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="аггрегация-group_by-summarise" class="level2">
+<h2 class="anchored" data-anchor-id="аггрегация-group_by-summarise">Аггрегация <code>group_by()</code> + <code>summarise()</code></h2>
+<ul>
+<li>Посчитайте средний урон и здоровье для юнитов, сгруппированных по типам брони (<code>armor_type</code>). Можно сделать это несколькими способами.</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(armor_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_damage =</span> <span class="fu">mean</span>(damage, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_hp =</span> <span class="fu">mean</span>(hp, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  armor_type   mean_damage mean_hp
+  &lt;chr&gt;              &lt;dbl&gt;   &lt;dbl&gt;
+1 Fort                50      700 
+2 Heavy               28.3    534.
+3 Invulnerable        16      500 
+4 Light               42.9    819.
+5 Medium              20.3    514.
+6 Unarmored           13.6    423.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(armor_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">c</span>(damage, hp), <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  armor_type   damage    hp
+  &lt;chr&gt;         &lt;dbl&gt; &lt;dbl&gt;
+1 Fort           50    700 
+2 Heavy          28.3  534.
+3 Invulnerable   16    500 
+4 Light          42.9  819.
+5 Medium         20.3  514.
+6 Unarmored      13.6  423.</code></pre>
+</div>
+</div>
+<ul>
+<li><p>Подсчитайте средние по всем числовым переменным, группируя по типу брони. Подсказка: здесь пригодится функция <code>across()</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb39"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(armor_type) <span class="sc">%&gt;%</span> </span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="fu">across</span>(<span class="fu">where</span>(is.numeric), <span class="cf">function</span>(x) <span class="fu">mean</span>(x, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 17
+  armor_type    gold  wood    pop    hp   armor sight speed  time damage coold…¹
+  &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+1 Fort          195   60     3     700    2      140   220   55     50      2.1 
+2 Heavy         200.  45.4   2.47  534.   1.76   130.  276.  35.6   28.3    1.85
+3 Invulnerable  NaN  NaN   NaN     500  NaN      120   270  NaN     16      1.35
+4 Light         263.  58.1   4.1   819.   1      155.  311.  44.5   42.9    1.94
+5 Medium        181.  30     2.47  514.   1.2    126   269.  24.1   20.3    2.11
+6 Unarmored     164.  28.5   2.36  423.   0.429  144.  296.  30.4   13.6    1.80
+# … with 6 more variables: dps &lt;dbl&gt;, range &lt;dbl&gt;, damage_2 &lt;dbl&gt;,
+#   cooldown_2 &lt;dbl&gt;, dps_2 &lt;dbl&gt;, range_2 &lt;dbl&gt;, and abbreviated variable name
+#   ¹​cooldown</code></pre>
+</div>
+</div></li>
+</ul>
+</section>
+<section id="преобразование-таблиц-pivot_longer-pivot_wider" class="level2">
+<h2 class="anchored" data-anchor-id="преобразование-таблиц-pivot_longer-pivot_wider">Преобразование таблиц <code>pivot_longer()</code>, <code>pivot_wider()</code></h2>
+<p>Сначала создадим таблицу</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb41"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a>wc3_dps <span class="ot">&lt;-</span> wc3_units <span class="sc">%&gt;%</span> </span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">if_summon =</span> <span class="fu">if_else</span>((pop <span class="sc">==</span> <span class="dv">0</span>) <span class="sc">|</span> <span class="fu">is.na</span>(pop), </span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>                            <span class="st">'summoned'</span>, <span class="st">'not_summoned'</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(race, if_summon) <span class="sc">%&gt;%</span> </span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_dps =</span> <span class="fu">mean</span>(dps, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stderr">
+<pre><code>`summarise()` has grouped output by 'race'. You can override using the
+`.groups` argument.</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a>wc3_dps</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+# Groups:   race [4]
+  race   if_summon    mean_dps
+  &lt;chr&gt;  &lt;chr&gt;           &lt;dbl&gt;
+1 Human  not_summoned     12.0
+2 Human  summoned         28.8
+3 N.Elf  not_summoned     14.8
+4 N.Elf  summoned         14.5
+5 Orc    not_summoned     11.3
+6 Orc    summoned         14.4
+7 Undead not_summoned     12.8
+8 Undead summoned         14.7</code></pre>
+</div>
+</div>
+<p>Теперь попробуем превратить таблицу в широкую</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb45"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" aria-hidden="true" tabindex="-1"></a>wc3_dps_wide <span class="ot">&lt;-</span> wc3_dps <span class="sc">%&gt;%</span> </span>
+<span id="cb45-2"><a href="#cb45-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_wider</span>(<span class="at">id_cols =</span> race, <span class="at">names_from =</span> if_summon, </span>
+<span id="cb45-3"><a href="#cb45-3" aria-hidden="true" tabindex="-1"></a>              <span class="at">values_from =</span> mean_dps)</span>
+<span id="cb45-4"><a href="#cb45-4" aria-hidden="true" tabindex="-1"></a>wc3_dps_wide</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+# Groups:   race [4]
+  race   not_summoned summoned
+  &lt;chr&gt;         &lt;dbl&gt;    &lt;dbl&gt;
+1 Human          12.0     28.8
+2 N.Elf          14.8     14.5
+3 Orc            11.3     14.4
+4 Undead         12.8     14.7</code></pre>
+</div>
+</div>
+<p>Полученную таблицу превратить обратно в длинную</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a>wc3_dps_wide <span class="sc">%&gt;%</span> </span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="fu">c</span>(not_summoned, summoned), </span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>               <span class="at">names_to =</span> <span class="st">'if_summon'</span>, </span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>               <span class="at">values_to =</span> <span class="st">'mean_dps'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 8 × 3
+# Groups:   race [4]
+  race   if_summon    mean_dps
+  &lt;chr&gt;  &lt;chr&gt;           &lt;dbl&gt;
+1 Human  not_summoned     12.0
+2 Human  summoned         28.8
+3 N.Elf  not_summoned     14.8
+4 N.Elf  summoned         14.5
+5 Orc    not_summoned     11.3
+6 Orc    summoned         14.4
+7 Undead not_summoned     12.8
+8 Undead summoned         14.7</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    target: function(trigger) {
+      return trigger.previousElementSibling;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+</body></html>
