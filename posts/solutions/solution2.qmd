@@ -6,6 +6,7 @@ execute:
   echo: true
 editor: visual
 categories: task
+draft: true
 ---
 
 Составлены в формате задание - ответ к нему.
@@ -95,6 +96,7 @@ categories: task
 -   Замените пятый элемент `double_vector` на 100. Правила такие же как при замене элементов векторов
 
     ```{r}
+    #| code-line-numbers: true
     list1$double_vector[5] <- 100
     list1
     ```

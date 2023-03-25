@@ -5,6 +5,7 @@ author: 'Elena U'
 execute: 
   echo: true
 categories: task
+draft: true
 ---
 
 Можно проверить свое решение и сравнить с моим.

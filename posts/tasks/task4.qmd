@@ -1,0 +1,232 @@
+---
+title: "Задания по четвертой лекции"
+date: '20 March 2023'
+author: 'Elena U'
+execute: 
+  echo: false
+editor: visual
+categories: task
+---
+
+Составлены в формате задание - ответ к нему.
+
+Рассчитано на самопроверку: ваша задача написать такой код, чтобы совпал с моим правильным ответом. Плюс есть еще несколько заданий на подумать и вспомнить материал лекции.
+
+**Не стесняйтесь гуглить**, это необходимо для решения многих задач в программировании, которые могут встретиться в реальной жизни.
+
+Если вдруг найдутся ошибки/опечатки, пишите на почту `e.ubogoeva@alumni.nsu.ru` или в телеграм. Вопросы по заданиям также можно писать на почту или в телеграм, телеграм чуть предпочтительнее.
+
+## Установка `tidyverse`
+
+Сначала необходимо установить и загрузить `tidyverse`:
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages('tidyverse')
+library(tidyverse)
+```
+
+```{r}
+#| include: false
+library(tidyverse)
+
+```
+
+## Работа с пайпами
+
+Перепишите следующие выражения с помощью пайпа `%>%`:
+
+```{r}
+#| echo: true
+sin(log(sqrt(1:10), 10))
+```
+
+```{r}
+c("Корень из", 2, "равен", sqrt(2))
+
+```
+
+```{r}
+#| echo: false
+2 %>% 
+  c("Корень из", ., "равен", sqrt(.))
+```
+
+## Работа со столбцами `dplyr::select()`
+
+Загрузка данных:
+
+```{r}
+#| echo: true
+#| output: false
+wc3_units <- read_tsv('https://raw.githubusercontent.com/ubogoeva/tidyverse_tutorial/master/data/wc3_heroes.txt',
+                      col_names = TRUE, 
+                      na = '-', 
+                      name_repair = 'minimal') %>% 
+  janitor::clean_names()
+```
+
+-   Выберите столбец `hp`
+
+    ```{r}
+    wc3_units %>% 
+      select(hp)
+    ```
+
+-   Выберите столбцы `unit`, `race`, `gold`, `armor`
+
+    ```{r}
+    wc3_units %>% 
+      select(unit, race, gold, armor)
+    ```
+
+-   Выберите столбцы с `hp` по `sight`, и с `cooldown` по `range`
+
+    ```{r}
+    wc3_units %>% 
+      select(hp:sight, cooldown:range)
+    ```
+
+-   Выведите столбец `gold` в качестве вектора
+
+    ```{r}
+    wc3_units %>% 
+      pull(gold)
+    ```
+
+-   Выведите все столбцы кроме первого `unit` (отрицательная индексация с помощью `!`)
+
+    ```{r}
+    wc3_units %>% 
+      select(!unit)
+    ```
+
+## Работа со строками `dplyr::filter()`, `dplyr::slice()`
+
+-   Выберите юнитов, показатель здоровья которых `hp` больше 950
+
+```{r}
+wc3_units %>% 
+  filter(hp > 950)
+```
+
+-   Выберите юнитов орков (`Orc`) с легким (`Light`) типом брони (`armor_type`)
+
+    ```{r}
+    wc3_units %>% 
+      filter(race == 'Orc' & armor_type == 'Light')
+    ```
+
+-   Выведите первые 6 юнитов `Undead` с максимальным показателем затраченного дерева (`wood`)
+
+    ```{r}
+    wc3_units %>% 
+      filter(race == 'Undead') %>% 
+      slice_max(wood, n = 6)
+    ```
+
+    > Хм, почему-то вывелось 7 строчек. Почему это произошло, можно узнать, прочитав справку функции `slice_max()` (аргумент `with_ties`).
+
+-   Попробуем вывести только 6 строчек в предыдущем задании.
+
+    ```{r}
+    wc3_units %>% 
+      filter(race == 'Undead') %>% 
+      slice_max(wood, n = 6, with_ties = FALSE)
+    ```
+
+Но вообще лучше сохранять дефолтное значение параметра `with_ties`
+
+## Создание колонок `dplyr::mutate()`
+
+-   Создайте новую колонку `is_air_attack`, которая будет заполнена `TRUE`, если у юнита есть воздушная атака (`air_attack`), и `FALSE`, если нет. Выведите на печать колонки `unit`, `race`, `air_attack` и `is_air_attack`
+
+    ```{r}
+    wc3_units %>% 
+      mutate(is_air_attack = !is.na(air_attack)) %>% 
+      select(unit, race, air_attack, is_air_attack)
+    ```
+
+-   Создайте колонку `how_fast`, заполненную значениями: если скорость `speed` больше 270 - fast, равно 270 - middle, меньше 270 - slow. Выведите на печать колонки `unit`, `race`, `speed`, `how_fast`.
+
+    ```{r}
+    wc3_units %>% 
+      mutate(how_fast = case_when(speed > 270 ~ 'fast',
+                                  speed == 270 ~ 'middle',
+                                  speed < 270 ~ 'slow')) %>% 
+      select(unit, race, speed, how_fast)
+    ```
+
+## Сортировка `dplyr::arrange()`
+
+-   Отсортируйте колонку `dps` по убыванию, выберите колонки `unit`, `race`, `damage`, `cooldown`, `dps`.
+
+```{r}
+wc3_units %>% 
+  arrange(desc(dps)) %>% 
+  select(unit, race, damage, cooldown, dps)
+```
+
+-   Отсортируйте колонку `hp` по возрастанию, `armor` по убыванию, выберите `unit`, `race`, `hp`, `armor`.
+
+    ```{r}
+    wc3_units %>% 
+      arrange(hp, desc(armor)) %>% 
+      select(unit, race, hp, armor)
+    ```
+
+## Аггрегация `group_by()` + `summarise()`
+
+-   Посчитайте средний урон и здоровье для юнитов, сгруппированных по типам брони (`armor_type`). Можно сделать это несколькими способами.
+
+```{r}
+wc3_units %>% 
+  group_by(armor_type) %>% 
+  summarise(mean_damage = mean(damage, na.rm = TRUE),
+            mean_hp = mean(hp, na.rm = TRUE))
+
+wc3_units %>% 
+  group_by(armor_type) %>% 
+  summarise(across(c(damage, hp), function(x) mean(x, na.rm = TRUE)))
+```
+
+-   Подсчитайте средние по всем числовым переменным, группируя по типу брони. Подсказка: здесь пригодится функция `across()`.
+
+    ```{r}
+    wc3_units %>% 
+      group_by(armor_type) %>% 
+      summarise(across(where(is.numeric), function(x) mean(x, na.rm = TRUE)))
+    ```
+
+## Преобразование таблиц `pivot_longer()`, `pivot_wider()`
+
+Сначала создадим таблицу
+
+```{r}
+#| echo: true
+wc3_dps <- wc3_units %>% 
+  mutate(if_summon = if_else((pop == 0) | is.na(pop), 
+                            'summoned', 'not_summoned')) %>% 
+  group_by(race, if_summon) %>% 
+  summarise(mean_dps = mean(dps, na.rm = TRUE)) 
+wc3_dps
+```
+
+Теперь попробуем превратить таблицу в широкую
+
+```{r}
+wc3_dps_wide <- wc3_dps %>% 
+  pivot_wider(id_cols = race, names_from = if_summon, 
+              values_from = mean_dps)
+wc3_dps_wide
+```
+
+Полученную таблицу превратить обратно в длинную
+
+```{r}
+wc3_dps_wide %>% 
+  pivot_longer(cols = c(not_summoned, summoned), 
+               names_to = 'if_summon', 
+               values_to = 'mean_dps')
+```

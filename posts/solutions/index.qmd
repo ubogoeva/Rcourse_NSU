@@ -1,7 +1,6 @@
 ---
 title: "Страница с решениями задач"
 editor: visual
-draft: true
 ---
 
 Здесь будут размещаться ссылки на решения задач.
@@ -9,3 +8,7 @@ draft: true
 -   [Решения 1](solution1.qmd)
 
 -   [Решения 2](solution2.qmd)
+
+-   [Решения 3](solution3.qmd)
+
+-   [Решения 4](solution4.qmd)
