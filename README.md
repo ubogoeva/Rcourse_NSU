@@ -1,19 +1,4 @@
----
-output: github_document
----
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
-
 # Rcourse_NSU
-
-<!-- badges: start -->
-
-<!-- badges: end -->
 
 Репозиторий с материалами курса по R для студентов НГУ. Читается в весеннем семестре с 19.02.2023.
 
