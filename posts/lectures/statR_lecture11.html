@@ -10,7 +10,7 @@
   <meta name="generator" content="quarto-1.2.269">
 
   <meta name="author" content="Elena U">
-  <title>Rcourse_NSU - Язык программирования R для анализа данных: лекция 6</title>
+  <title>Rcourse_NSU - Язык программирования R для анализа данных: лекция 11</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
@@ -28,70 +28,6 @@
       margin: 0 0.8em 0.2em -1.6em;
       vertical-align: middle;
     }
-    pre > code.sourceCode { white-space: pre; position: relative; }
-    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-    pre > code.sourceCode > span:empty { height: 1.2em; }
-    .sourceCode { overflow: visible; }
-    code.sourceCode > span { color: inherit; text-decoration: inherit; }
-    div.sourceCode { margin: 1em 0; }
-    pre.sourceCode { margin: 0; }
-    @media screen {
-    div.sourceCode { overflow: auto; }
-    }
-    @media print {
-    pre > code.sourceCode { white-space: pre-wrap; }
-    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-    }
-    pre.numberSource code
-      { counter-reset: source-line 0; }
-    pre.numberSource code > span
-      { position: relative; left: -4em; counter-increment: source-line; }
-    pre.numberSource code > span > a:first-child::before
-      { content: counter(source-line);
-        position: relative; left: -1em; text-align: right; vertical-align: baseline;
-        border: none; display: inline-block;
-        -webkit-touch-callout: none; -webkit-user-select: none;
-        -khtml-user-select: none; -moz-user-select: none;
-        -ms-user-select: none; user-select: none;
-        padding: 0 4px; width: 4em;
-        color: #aaaaaa;
-      }
-    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
-    div.sourceCode
-      { color: #003b4f; background-color: #f1f3f5; }
-    @media screen {
-    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
-    }
-    code span { color: #003b4f; } /* Normal */
-    code span.al { color: #ad0000; } /* Alert */
-    code span.an { color: #5e5e5e; } /* Annotation */
-    code span.at { color: #657422; } /* Attribute */
-    code span.bn { color: #ad0000; } /* BaseN */
-    code span.bu { } /* BuiltIn */
-    code span.cf { color: #003b4f; } /* ControlFlow */
-    code span.ch { color: #20794d; } /* Char */
-    code span.cn { color: #8f5902; } /* Constant */
-    code span.co { color: #5e5e5e; } /* Comment */
-    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
-    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
-    code span.dt { color: #ad0000; } /* DataType */
-    code span.dv { color: #ad0000; } /* DecVal */
-    code span.er { color: #ad0000; } /* Error */
-    code span.ex { } /* Extension */
-    code span.fl { color: #ad0000; } /* Float */
-    code span.fu { color: #4758ab; } /* Function */
-    code span.im { color: #00769e; } /* Import */
-    code span.in { color: #5e5e5e; } /* Information */
-    code span.kw { color: #003b4f; } /* Keyword */
-    code span.op { color: #5e5e5e; } /* Operator */
-    code span.ot { color: #003b4f; } /* Other */
-    code span.pp { color: #ad0000; } /* Preprocessor */
-    code span.sc { color: #5e5e5e; } /* SpecialChar */
-    code span.ss { color: #20794d; } /* SpecialString */
-    code span.st { color: #20794d; } /* String */
-    code span.va { color: #111111; } /* Variable */
-    code span.vs { color: #20794d; } /* VerbatimString */
-    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="../../site_libs/revealjs/dist/theme/quarto.css" id="theme">
   <link href="../../site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -391,8 +327,8 @@
     <div class="slides">
 
 <section id="title-slide" class="quarto-title-block center">
-  <h1 class="title">Язык программирования R для анализа данных: лекция 6</h1>
-  <p class="subtitle">Введение в статистику вывода</p>
+  <h1 class="title">Язык программирования R для анализа данных: лекция 11</h1>
+  <p class="subtitle">Двухфакторный дисперсионный анализ</p>
 
 <div class="quarto-title-authors">
 <div class="quarto-title-author">
@@ -403,287 +339,11 @@ Elena U
 </div>
 
 </section>
-<section id="рекомендуемая-литература" class="slide level2">
-<h2>Рекомендуемая литература</h2>
+<section id="вспомним-что-было-в-предыдущих-сериях" class="slide level2">
+<h2>Вспомним, что было в предыдущих сериях…</h2>
 <ul>
-<li><p>Книги:</p>
-<ul>
-<li>“Статистика для всех” Сара Бослаф (Statistics in a Nutshell)</li>
-</ul></li>
-<li><p>Курсы</p>
-<ul>
-<li><p>Введение в статистику (Части <a href="https://stepik.org/course/76">1</a>, <a href="https://stepik.org/course/524">2</a>, <a href="https://stepik.org/course/2152">3</a>) на платформе Stepik</p></li>
-<li><p><a href="https://www.coursera.org/learn/probability-intro">Introduction to Probability and Data with R</a> на платформе Coursera</p></li>
-</ul></li>
+<li>Однофакторный дисперсионный анализ</li>
 </ul>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Больше источников <a href="http://t.me/stats_for_science/28">здесь</a></p>
-</div>
-</div>
-</div>
-</section>
-<section id="план-лекции" class="slide level2">
-<h2>План лекции</h2>
-<ul>
-<li><p>Типы переменных и типы шкал</p></li>
-<li><p>Понятие генеральной совокупности и выборки</p></li>
-<li><p>Описательные статистики</p></li>
-<li><p>Статистика вывода</p></li>
-<li><p>Тест Стьюдента, ограничения, особенности</p></li>
-</ul>
-</section>
-<section id="данные-для-работы" class="slide level2">
-<h2>Данные для работы</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>wc3_units <span class="ot">&lt;-</span> <span class="fu">read_tsv</span>(<span class="st">'https://raw.githubusercontent.com/ubogoeva/tidyverse_tutorial/master/data/wc3_heroes.txt'</span>,</span>
-<span id="cb1-3"><a href="#cb1-3"></a>                      <span class="at">col_names =</span> <span class="cn">TRUE</span>, </span>
-<span id="cb1-4"><a href="#cb1-4"></a>                      <span class="at">na =</span> <span class="st">'-'</span>, </span>
-<span id="cb1-5"><a href="#cb1-5"></a>                      <span class="at">name_repair =</span> <span class="st">'minimal'</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb1-6"><a href="#cb1-6"></a>  janitor<span class="sc">::</span><span class="fu">clean_names</span>() <span class="co"># для правильных названий колонок</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-</section>
-<section id="типы-переменных-и-типы-шкал" class="slide level2">
-<h2>Типы переменных и типы шкал</h2>
-<div>
-<ul>
-<li class="fragment"><p>Количественные</p>
-<ul>
-<li class="fragment"><p>Непрерывные (рост, вес, длина корня)</p></li>
-<li class="fragment"><p>Дискретные (количество детей в семье)</p></li>
-<li class="fragment"><p>Интервальные (температура в градусах Цельсия)</p></li>
-<li class="fragment"><p>Ранговые (места в соревнованиях, тяжесть болезни)</p></li>
-</ul></li>
-<li class="fragment"><p>Качественные (категориальные, номинативные)</p>
-<ul>
-<li class="fragment">Бинарные (есть мутация или нет)</li>
-</ul></li>
-</ul>
-</div>
-</section>
-<section id="классификации-типов-переменных" class="slide level2">
-<h2>Классификации типов переменных</h2>
-<p>Зависимые и независимые переменные - важно для проведения статистических критериев.</p>
-</section>
-<section id="что-такое-генеральная-совокупность" class="slide level2">
-<h2>Что такое генеральная совокупность?</h2>
-<div>
-<ul>
-<li class="fragment"><p>Генеральная совокупность — совокупность всех объектов (единиц), относительно которых предполагается делать выводы при изучении конкретной задачи.</p></li>
-<li class="fragment"><p>Генеральная совокупность состоит из всех объектов, которые имеют качества, свойства, интересующие исследователя.</p>
-<p>Например: все клетки определенной клеточной линии, все растения определенного генотипа.</p></li>
-</ul>
-</div>
-</section>
-<section id="что-такое-выборка" class="slide level2">
-<h2>Что такое выборка?</h2>
-<ul>
-<li><p>Выборка — часть генеральной совокупности элементов, доступная для исследования.</p>
-<p><img data-src="images/image-1460015740.png"></p></li>
-</ul>
-</section>
-<section id="классификация-выборки" class="slide level2">
-<h2>Классификация выборки</h2>
-<ul>
-<li><p>По принципу отбора:</p>
-<ul>
-<li><p>Независимые</p></li>
-<li><p>Зависимые (например до и после применения лекарства)</p></li>
-</ul></li>
-<li><p>По корректности отбора:</p>
-<ul>
-<li><p>Репрезентативные</p></li>
-<li><p>Нерепрезентативные</p></li>
-</ul></li>
-<li><p>Основные стратегии отбора:</p>
-<ul>
-<li><p>Простая случайная выборка</p></li>
-<li><p>Стратифицированная</p></li>
-</ul></li>
-</ul>
-</section>
-<section id="как-можно-описать-значения-в-выборке" class="slide level2">
-<h2>Как можно описать значения в выборке?</h2>
-<p>Описательные статистики:</p>
-<ul>
-<li><p>Меры центральной тенденции</p></li>
-<li><p>Меры изменчивости</p></li>
-</ul>
-</section>
-<section id="меры-центральной-тенденции" class="slide level2">
-<h2>Меры центральной тенденции</h2>
-<ul>
-<li><p>Среднее - среднее арифметическое всех значений.</p></li>
-<li><p>Медиана - середина упорядоченного ряда значений.</p></li>
-<li><p>Мода - наиболее часто встречающееся значение в выборке.</p></li>
-</ul>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">mean</span>(wc3_units<span class="sc">$</span>gold) <span class="co"># среднее</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] NA</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">mean</span>(wc3_units<span class="sc">$</span>gold, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># среднее без учета пропущенных значений</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 195.625</code></pre>
-</div>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1"></a><span class="fu">median</span>(wc3_units<span class="sc">$</span>gold, <span class="at">na.rm =</span> <span class="cn">TRUE</span>) <span class="co"># медиана</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>[1] 190</code></pre>
-</div>
-</div>
-<p>Для вычисления моды можно использовать функцию <code>dplyr::count()</code></p>
-</section>
-<section id="вычисление-моды-dplyrcount" class="slide level2">
-<h2>Вычисление моды: <code>dplyr::count()</code></h2>
-<div class="cell columns column-output-location">
-<div class="column">
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
-<span id="cb8-2"><a href="#cb8-2"></a>  <span class="fu">count</span>(armor_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 2
-  armor_type       n
-  &lt;chr&gt;        &lt;int&gt;
-1 Fort             1
-2 Heavy           29
-3 Invulnerable     1
-4 Light           11
-5 Medium          15
-6 Unarmored       14</code></pre>
-</div>
-</div>
-</div>
-<div class="cell columns column-output-location">
-<div class="column">
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1"></a>wc3_units <span class="sc">%&gt;%</span> </span>
-<span id="cb10-2"><a href="#cb10-2"></a>  <span class="fu">count</span>(armor_type) <span class="sc">%&gt;%</span> </span>
-<span id="cb10-3"><a href="#cb10-3"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(n))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div><div class="column">
-<div class="cell-output cell-output-stdout">
-<pre><code># A tibble: 6 × 2
-  armor_type       n
-  &lt;chr&gt;        &lt;int&gt;
-1 Heavy           29
-2 Medium          15
-3 Unarmored       14
-4 Light           11
-5 Fort             1
-6 Invulnerable     1</code></pre>
-</div>
-</div>
-</div>
-</section>
-<section id="меры-изменчивости" class="slide level2">
-<h2>Меры изменчивости</h2>
-<ul>
-<li><p>Размах – разность между максимальным и минимальным значениями.</p></li>
-<li><p>Межквартильный размах – разница между верхним и нижним квартилем.</p></li>
-<li><p>Дисперсия – сумма квадратов отклонений, деленная на их количество.</p>
-<div class="callout callout-note callout-captioned callout-style-default">
-<div class="callout-body">
-<div class="callout-caption">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<p><strong>Note</strong></p>
-</div>
-<div class="callout-content">
-<p>Отклонение – это разность между средним арифметическим и конкретным значением.</p>
-</div>
-</div>
-</div></li>
-<li><p>Стандартное отклонение – корень из дисперсии.</p></li>
-</ul>
-</section>
-<section id="формула-дисперсии-и-стандартного-отклонения" class="slide level2">
-<h2>Формула дисперсии и стандартного отклонения</h2>
-<p>Дисперсия (variance):</p>
-<p><span class="math display">\[
-var = \frac{\sum_{i=1}^n(x_i - \overline{x})^2}{n},
-\]</span></p>
-<p>где <span class="math inline">\(\overline{x}\)</span> - среднее, n - количество элементов в выборке</p>
-<p>Стандартное отклонение (standard deviation, sd)</p>
-<p><span class="math display">\[
-sd = \sqrt{var} =\sqrt{\frac{\sum_{i=1}^n(x_i - \overline{x})^2}{n}}
-\]</span></p>
-<p>Здесь приведена смещенная оценка - то есть в знаменателе n.</p>
-<p>По умолчанию функции <code>var()</code> и <code>sd()</code> считают несмещенную оценку - в знаменателе n-1.</p>
-</section>
-<section id="межквартильный-размах-или-как-интерпретировать-боксплот" class="slide level2">
-<h2>Межквартильный размах или как интерпретировать боксплот</h2>
-<p>Боксплот</p>
-
-<img data-src="https://i.ytimg.com/vi/BE8CVGJuftI/maxresdefault.jpg" class="r-stretch"></section>
-<section id="оценки-среднего" class="slide level2">
-<h2>Оценки среднего</h2>
-<p>Стандартная ошибка</p>
-<p>Доверительный интервал</p>
-</section>
-<section id="нормальное-распределение" class="slide level2">
-<h2>Нормальное распределение</h2>
-<p>Непрерывное распределение вероятностей с пиком в центре и симметричными боковыми сторонами, которое в одномерном случае задаётся функцией плотности вероятности, совпадающей с функцией Гаусса.</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1"></a><span class="fu">set.seed</span>(<span class="dv">1</span>)</span>
-<span id="cb12-2"><a href="#cb12-2"></a>norm_distr <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">10000</span>)</span>
-<span id="cb12-3"><a href="#cb12-3"></a><span class="fu">hist</span>(norm_distr, <span class="at">freq =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb12-4"><a href="#cb12-4"></a><span class="fu">lines</span>(<span class="fu">density</span>(norm_distr))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="statR_lecture6_files/figure-revealjs/unnamed-chunk-6-1.png" width="3000" class="r-stretch"></section>
-<section id="нормальное-распределение-1" class="slide level2">
-<h2>Нормальное распределение</h2>
-
-<img data-src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Standard_deviation_diagram.svg/1200px-Standard_deviation_diagram.svg.png" width="522" class="r-stretch"></section>
-<section id="центральная-предельная-теорема" class="slide level2">
-<h2>Центральная предельная теорема</h2>
-<p>Согласно центральной предельной теореме (ЦПТ, <em>central limit theorem</em>), какой бы ни была форма распределения в генеральной совокупности, <strong>выборочное распределение средних</strong> будет стремиться к нормальному. При этом чем больше размер выборки, тем ближе выборочное распределение средних будет к нормальному.</p>
-</section>
-<section id="центральная-предельная-теорема-1" class="slide level2">
-<h2>Центральная предельная теорема</h2>
-<p>Используем лог-нормальное распределение:</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1"></a><span class="fu">hist</span>(<span class="fu">rlnorm</span>(<span class="dv">10000</span>), <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="statR_lecture6_files/figure-revealjs/unnamed-chunk-7-1.png" width="3000" class="r-stretch"></section>
-<section class="slide level2">
-
-<p>Как будут распределены средние из лог-нормального распределения?</p>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1"></a>many_means <span class="ot">&lt;-</span> <span class="fu">replicate</span>(<span class="dv">1000</span>, <span class="fu">mean</span>(<span class="fu">rlnorm</span>(<span class="dv">10000</span>)))</span>
-<span id="cb14-2"><a href="#cb14-2"></a><span class="fu">hist</span>(many_means, <span class="at">breaks =</span> <span class="dv">100</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-
-</div>
-<img data-src="statR_lecture6_files/figure-revealjs/unnamed-chunk-8-1.png" width="3000" class="r-stretch"><p>Они будут распределены нормально!</p>
-</section>
-<section id="тест-стьюдента" class="slide level2">
-<h2>Тест Стьюдента</h2>
-<div class="cell">
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1"></a>wc3_units_armor <span class="ot">&lt;-</span> wc3_units <span class="sc">%&gt;%</span> </span>
-<span id="cb15-2"><a href="#cb15-2"></a>  <span class="fu">filter</span>(armor_type <span class="sc">==</span> <span class="st">'Heavy'</span> <span class="sc">|</span> armor_type <span class="sc">==</span> <span class="st">'Light'</span>)</span>
-<span id="cb15-3"><a href="#cb15-3"></a><span class="fu">t.test</span>(wc3_units_armor<span class="sc">$</span>hp <span class="sc">~</span> wc3_units_armor<span class="sc">$</span>armor_type)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-stdout">
-<pre><code>
-    Welch Two Sample t-test
-
-data:  wc3_units_armor$hp by wc3_units_armor$armor_type
-t = -2.3602, df = 21.493, p-value = 0.02778
-alternative hypothesis: true difference in means between group Heavy and group Light is not equal to 0
-95 percent confidence interval:
- -536.65167  -34.28877
-sample estimates:
-mean in group Heavy mean in group Light 
-           533.6207            819.0909 </code></pre>
-</div>
-</div>
 
 <div class="footer footer-default">
 
@@ -904,44 +564,6 @@ mean in group Heavy mean in group Light
         ]
       });
     </script>
-    
-    <script>
-      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
-      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
-      // slide changes (different for each slide format).
-      (function () {
-        // dispatch for htmlwidgets
-        function fireSlideEnter() {
-          const event = window.document.createEvent("Event");
-          event.initEvent("slideenter", true, true);
-          window.document.dispatchEvent(event);
-        }
-
-        function fireSlideChanged(previousSlide, currentSlide) {
-          fireSlideEnter();
-
-          // dispatch for shiny
-          if (window.jQuery) {
-            if (previousSlide) {
-              window.jQuery(previousSlide).trigger("hidden");
-            }
-            if (currentSlide) {
-              window.jQuery(currentSlide).trigger("shown");
-            }
-          }
-        }
-
-        // hookup for slidy
-        if (window.w3c_slidy) {
-          window.w3c_slidy.add_observer(function (slide_num) {
-            // slide_num starts at position 1
-            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
-          });
-        }
-
-      })();
-    </script>
-
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

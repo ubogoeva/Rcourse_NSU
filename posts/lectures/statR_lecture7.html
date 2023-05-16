@@ -420,8 +420,8 @@ Elena U
 <p>Sample - выборка.</p>
 <table>
 <colgroup>
-<col style="width: 26%">
-<col style="width: 74%">
+<col style="width: 29%">
+<col style="width: 70%">
 </colgroup>
 <tbody>
 <tr class="odd">
@@ -549,7 +549,7 @@ Elena U
 </div>
 </div></li>
 <li class="fragment"><p>Среднее равно 100, следовательно -&gt; пояснение на графике</p></li>
-<li class="fragment"><p>Чему равно значение pnorm(130) для шкалы IQ?</p></li>
+<li class="fragment"><p>Чему равно значение <code>pnorm(130)</code> для шкалы IQ?</p></li>
 <li class="fragment"><div class="cell">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a><span class="fu">pnorm</span>(<span class="dv">130</span>, <span class="at">mean =</span> <span class="dv">100</span>, <span class="at">sd =</span> <span class="dv">15</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -925,8 +925,30 @@ mean of x mean of y
 <h2>Тест Стьюдента и тест Велча</h2>
 <p>На самом деле по умолчанию в R запускается тест Велча, поскольку предполагается, что дисперсии двух выборок не равны</p>
 <p>Формула теста Стьюдента:</p>
+<p><span class="math display">\[
+t = \frac{\overline{X_1}-\overline{X_2}}{s_x\sqrt{\frac{1}{n_1} + \frac{1}{n_2}}},
+s_x = \sqrt{\frac{(n_1 - 1)s_1^2 + (n_2 - 1)s_2^2}{n_1 + n_2 - 2}}
+\]</span></p>
+<p>Чтобы запустить именно тест Стьюдента, можно использовать аргумент <code>var.equal = TRUE</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb74"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1"></a><span class="fu">t.test</span>(wc3_units_armor<span class="sc">$</span>hp <span class="sc">~</span> wc3_units_armor<span class="sc">$</span>armor_type, </span>
+<span id="cb74-2"><a href="#cb74-2"></a>       <span class="at">var.equal =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+    Two Sample t-test
 
-<img data-src="images/image-253443710.png" class="r-stretch"></section>
+data:  wc3_units_armor$hp by wc3_units_armor$armor_type
+t = -2.1765, df = 38, p-value = 0.0358
+alternative hypothesis: true difference in means between group Heavy and group Light is not equal to 0
+95 percent confidence interval:
+ -550.98551  -19.95493
+sample estimates:
+mean in group Heavy mean in group Light 
+           533.6207            819.0909 </code></pre>
+</div>
+</div>
+<p>Однако это делать не рекомендуется, поскольку при равных дисперсиях тест Стьюдента не будет сильно отличаться от теста Велча, а при разных тест Велча точнее.</p>
+</section>
 <section class="slide level2">
 
 <p>Формула теста Велча:</p>
@@ -937,7 +959,7 @@ t = \frac{\overline{X}_1 - \overline{X}_2}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2
 <p><span class="math display">\[
 df = \frac{(s_1^2/n_1 + s_2^2 / n_2)^2}{(s_1^2/n_1)^2/(n_1-1) + (s_2^2/n_2)^2/(n_2-1)}
 \]</span></p>
-<p>По умолчанию рекомендуется использовать тест Велча, если не проверять условие равенства дисперсий.</p>
+<p>По умолчанию рекомендуется использовать тест Велча.</p>
 
 <div class="footer footer-default">
 
