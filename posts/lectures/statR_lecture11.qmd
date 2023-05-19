@@ -1,0 +1,33 @@
+---
+title: "Язык программирования R для анализа данных: лекция 11"
+subtitle: 'Двухфакторный дисперсионный анализ'
+author: "Elena U"
+#date: "Created on 01 April, 2023"
+execute:
+  echo: true
+  output: true
+format: 
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
+    # mainfont: Arial
+    # fontsize: 14px
+    theme: [default, custom.scss]
+    chalkboard: 
+      buttons: true
+    # theme: [serif]
+    # mouse-wheel: true
+    auto-play-media: true
+    width: 1280
+    height: 720
+    fig-dpi: 300
+    # logo: figures/icg.png
+revealjs-plugins:
+  - pointer
+editor: visual
+draft: true
+---
+
+## Вспомним, что было в предыдущих сериях...
+
+-   Однофакторный дисперсионный анализ

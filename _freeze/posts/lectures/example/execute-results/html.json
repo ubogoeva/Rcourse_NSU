@@ -1,0 +1,16 @@
+{
+  "hash": "5e3f57b099b7eaaaebe027964a986633",
+  "result": {
+    "markdown": "---\ntitle: \"project\"\n---\n\n\nРаспределение ракообразных каких\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\n```\n\n::: {.cell-output .cell-output-stderr}\n```\n── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──\n✔ ggplot2 3.4.0     ✔ purrr   1.0.1\n✔ tibble  3.1.7     ✔ dplyr   1.0.9\n✔ tidyr   1.2.0     ✔ stringr 1.5.0\n✔ readr   2.1.2     ✔ forcats 0.5.2\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: пакет 'purrr' был собран под R версии 4.2.3\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\nWarning: пакет 'stringr' был собран под R версии 4.2.3\n```\n:::\n\n::: {.cell-output .cell-output-stderr}\n```\n── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──\n✖ dplyr::filter() masks stats::filter()\n✖ dplyr::lag()    masks stats::lag()\n```\n:::\n\n```{.r .cell-code}\ndata <- mtcars\n```\n:::\n\n\nЗагрузили данные, построим статистики\n\n\n::: {.cell}\n\n```{.r .cell-code}\nplot(mtcars$mpg)\n```\n\n::: {.cell-output-display}\n![](example_files/figure-html/unnamed-chunk-2-1.png){width=672}\n:::\n:::\n\n::: {.cell}\n\n:::\n\n\nАРАРВр\n\n::: {.cell}\n\n:::\n\n::: {.cell}\n\n:::\n\n## Заголовок 2\n### Заголовок 3\n\n* список 1\n* список 2\n",
+    "supporting": [
+      "example_files"
+    ],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

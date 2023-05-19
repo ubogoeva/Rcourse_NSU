@@ -185,7 +185,6 @@ boxplot(damage ~ race, wc3_units)
 :::
 
 ::: {.column width="70%"}
-
 ![](https://pozdniakov.github.io/tidy_stats/images/ggplot2_scheme.png){width="588"}
 :::
 :::

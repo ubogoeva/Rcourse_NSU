@@ -1,0 +1,488 @@
+---
+title: "Язык программирования R для анализа данных: лекция 10"
+subtitle: 'Множественная линейная регрессия'
+author: "Elena U"
+#date: "Created on 01 April, 2023"
+execute:
+  echo: true
+  output: true
+format: 
+  revealjs:
+    slide-number: c/t
+    show-slide-number: all
+    # mainfont: Arial
+    # fontsize: 14px
+    theme: [default, custom.scss]
+    chalkboard: 
+      buttons: true
+    # theme: [serif]
+    # mouse-wheel: true
+    auto-play-media: true
+    width: 1280
+    height: 720
+    fig-dpi: 300
+    # logo: figures/icg.png
+revealjs-plugins:
+  - pointer
+editor: visual
+draft: true
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+df <- read_csv('https://raw.githubusercontent.com/ubogoeva/Rcourse_NSU/master/posts/lectures/data/happyscore_income.csv')
+head(df)
+df <- df %>% 
+  rename(country = country...1) %>% 
+  select(!country...11)
+```
+
+## Вспомним материал предыдущей лекции {style="auto-animate"}
+
+::: incremental
+-   Что такое ковариация? Что такое коэффициент корреляции?
+
+    ::: {.fragment .fade-in}
+    **Ковариация** -- это мера совместной изменчивости двух случайных величин
+
+    **Коэффициент корреляции** -- это статистическая мера степени, в которой изменения значения одной переменной предсказывают изменение значения другой.
+    :::
+
+-   Какие задачи можно решить с помощью линейной регрессии?
+
+    ::: {.fragment .fade-in}
+    Предсказание значений одной переменной на основании другой
+    :::
+
+-   Коэффициент детерминации
+
+-   Ограничения линейной регрессии
+:::
+
+## План лекции
+
+-   Что такое коэффициент детерминации и как он выводится?
+
+-   Множественная линейная регрессия
+
+-   Проблема мультиколлинеарности
+
+-   Отбор моделей
+
+-   Ограничения линейной регрессии
+
+Загрузим нужные библиотеки:
+
+```{r}
+library(tidyverse)
+library(patchwork)
+```
+
+## Коэффициент детерминации: формула
+
+Обозначается как $R^2$ -- доля объясненной дисперсии.
+
+$$
+R^2 = \frac{SSR}{SST}
+$$
+
+$SSR = \sum_i{(\hat{y_i}-\overline{y})^2}$ - объясненная моделью дисперсия.
+
+$SSE = \sum{(y_i - \hat{y_i})^2}$ - необъясненная дисперсия.
+
+$SST = SSR + SSE = \sum_i{(y_i-\overline{y})^2}$ - общая дисперсия.
+
+Объясненную моделью дисперсию можно вычислить как разницу между общей дисперсией и необъясненной дисперсией ($SSR = SST - SSE$).
+
+Разберем на рисунке:
+
+## Коэффициент детерминации: график
+
+```{r}
+#| echo: false
+df <- data.frame(
+  x=c(0.9, 1.8, 2.4, 3.5, 3.9, 4.4, 5.1, 5.6, 6.3),
+  y=c(1.4, 2.6, 1.0, 3.7, 5.5, 3.2, 3.0, 4.9, 6.3))
+model <- lm(y ~ x, data = df)
+df_mean <- df %>% 
+  mutate(y1 = mean(y), x1 = x)
+  # rename(x = x2)
+df_regr <- df %>% 
+  mutate(y1 = predict(model, data.frame(x = df$x)), x1 = x)
+# predict(model, data.frame(x = df$x))
+regr_plot <- df %>% 
+  ggplot(aes(x, y))+
+  geom_point()+
+  geom_smooth(formula = 'y ~ x', method = 'lm', se = FALSE, linewidth = 0.7)+
+  geom_segment(aes(x = x1, y = y1, xend = x, yend = y), 
+               data = df_regr, linewidth = 0.4, linetype = 2)+
+  ggtitle('Residual variation SSE')+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+
+# regr_plot
+mean_plot <- df %>% 
+  ggplot(aes(x, y))+
+  geom_point()+
+  geom_hline(yintercept = mean(df$y), color = 'blue', linewidth = 0.7)+
+  geom_segment(aes(x = x1, y = y1, xend = x, yend = y), 
+               data = df_mean, linewidth = 0.4, linetype = 2)+
+  annotate('text', x = 1.2, y = mean(df$y)+0.2, label = 'y_mean')+
+  ggtitle('Total variation (SST)')+
+  # geom_smooth(formula = 'y ~ x', method = 'lm', se = FALSE)+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+mean_plot + regr_plot
+```
+
+## Коэффициент детерминации: расчет
+
+```{r}
+df <- data.frame(
+  x=c(0.9, 1.8, 2.4, 3.5, 3.9, 4.4, 5.1, 5.6, 6.3),
+  y=c(1.4, 2.6, 1.0, 3.7, 5.5, 3.2, 3.0, 4.9, 6.3))
+sst <- sum((df$y - mean(df$y))^2) # общая сумма квадратов, SST
+ssr <- sst - sum((df$y - predict(model, data.frame(x = df$x)))^2)
+r2 <- ssr / sst
+r2
+```
+
+```{r}
+#| output-location: column
+summary(lm(y ~ x, data = df)) # все сходится
+```
+
+## Коэффициент детерминации
+
+```{r}
+#| echo: false
+df %>% 
+  ggplot(aes(x, y))+
+  geom_point()+
+  geom_smooth(formula = 'y ~ x', method = 'lm', 
+              se = FALSE, linewidth = 0.7, color = 'gray50')+
+  geom_hline(yintercept = mean(df$y), color = 'red', linewidth = 0.5)+
+  geom_segment(aes(x = x1, y = y, xend = x, yend = mean(y)), 
+               data = df_regr, linewidth = 0.4, 
+               linetype = 1, color = '#253494', alpha = 0.8)+
+  geom_segment(aes(x = x1, y = y1, xend = x, yend = y), 
+               data = df_regr, linewidth = 0.4, 
+               linetype = 2, color= '#41b6c4')+
+  # ggtitle('Total variation')+
+  annotate('text', x = 6.1, y = 4.5, label = 'SSR', color= '#253494')+
+  annotate('text', x = 6.1, y = 5.8, label = 'SSE', color= '#41b6c4')+
+  geom_segment(aes(x = max(x), y = mean(y),
+                   xend = max(x)+0.1, yend = mean(y)+0.1))+
+  geom_segment(aes(x = max(x), y = max(y),
+                   xend = max(x)+0.1, yend = max(y)-0.1))+
+  geom_segment(aes(x = max(x)+0.1, y = mean(y)+0.1,
+                   xend = max(x)+0.1, yend = max(y)-0.1))+
+  annotate('text', x = 6.6, y = 5, label = 'SST')+
+  theme_classic()+
+  theme(plot.title = element_text(hjust = 0.5))
+```
+
+------------------------------------------------------------------------
+
+![](images/image-1678901130.png)
+
+# Множественная линейная регрессия
+
+## Как собирать данные?
+
+Важно помнить, что Garbage in - Garbage out.
+
+![](/posts/lectures/images/image-1617963202.png){alt="Проблема мультиколлинеарности"}
+
+-   Независимость наблюдений.
+
+-   Проверка на наличие скрытых (группирующих) переменных.
+
+-   Учет пространственных и временных автокорреляций.
+
+## Данные для работы
+
+```{r}
+happy_score_data <- read_csv('https://raw.githubusercontent.com/ubogoeva/Rcourse_NSU/master/posts/lectures/data/happyscore_income.csv')
+happy_score_data <- happy_score_data %>% 
+  rename(country = country...1) %>% 
+  select(!country...11)
+head(happy_score_data)
+```
+
+Датасет с каггла о связи ВВП и счастья населения.
+
+## Формулировка множественной линейной регрессии
+
+$$
+Y = \beta_0 + \beta_1x_1 + \beta_2x_2 + ... + \beta_nx_n + \epsilon
+$$
+
+Попробуем предсказать `happyScore`, основываясь на остальных переменных и выберем лучшую модель.
+
+## Смысл коэффициентов во множественной линейной модели
+
+Интерсепт - значение зависимой переменной, когда все независимые равны нулю.
+
+**Коэффициент перед предиктором**: показывает на сколько единиц изменится значение зависимой переменной в случае, если значение **этого** предиктора изменится на единицу, а все **другие** показатели не изменятся.
+
+## Геометрический смысл
+
+Для двух коэффициентов теперь фитим (подгоняем) плоскость в трехмерном пространстве.
+
+$Y = \beta_0 + \beta_1x_1 + \beta_2x_2 + \epsilon$
+
+![](/posts/lectures/images/image-1714685837.png){width="471"}
+
+Для большего количества предикторов невозможно нарисовать :(
+
+## Нотация формул линейных моделей в R
+
++-----------------------------------------------------------+--------------+
+| Модель                                                    | Формула      |
++===========================================================+==============+
+| Простая линейная регрессия                                | Y \~ X       |
++-----------------------------------------------------------+--------------+
+| Простая линейная регрессия, без интерсепта b~0~           | Y \~ -1 + X  |
++-----------------------------------------------------------+--------------+
+| Уменьшенная простая линейная регрессия (только интерсепт) | Y \~ 1 \     |
+|                                                           | Y \~ 1 - X   |
++-----------------------------------------------------------+--------------+
+| Множественная линейная регрессия                          | Y \~ X1 + X2 |
++-----------------------------------------------------------+--------------+
+
+## Нотация формул линейных моделей в R
+
++-----------------+---------------------------------------------------------------------------+
+| Элемент формулы | Значение                                                                  |
++=================+===========================================================================+
+| :               | Взаимодействие предикторов\                                               |
+|                 | Y \~ X1 + X2 + X1:X2                                                      |
++-----------------+---------------------------------------------------------------------------+
+| \*              | Все возможные взаимодействия                                              |
+|                 |                                                                           |
+|                 | Y \~ X1\*X2 тоже самое, что и\                                            |
+|                 | Y \~ X1+X2 + X1:X2                                                        |
++-----------------+---------------------------------------------------------------------------+
+| .               | Y \~ .                                                                    |
+|                 |                                                                           |
+|                 | В правой части формулы записываются все переменные из датафрейма, кроме Y |
++-----------------+---------------------------------------------------------------------------+
+
+## Условия применимости множественной линейной регрессии {style="font-size: 90%"}
+
+1.  Линейная связь (=отсутствие паттерна на графике остатков).
+
+2.  Независимость наблюдений.
+
+3.  Гомогенность дисперсий.
+
+4.  Нормально распределение ошибок (остатков).
+
+5.  Отсутствие влиятельных наблюдений.
+
+6.  **Отсутствие коллинеарности предикторов (для множественной регрессии)**
+
+Все условия совпадают с требованиями к простой линейной регрессии + проверка на коллинеарность.
+
+::: callout-note
+Вообще перечисленные выше условия применимости совпадают и с многими другими статистическими тестами (и это не случайно!)
+:::
+
+## График остатков
+
+Такой вариант графика позволяет оценивать паттерны распределения остатков для нескольких независимых переменных.
+
+```{r}
+#| echo: false 
+df <- data.frame(
+  x=c(0.9, 1.8, 2.4, 3.5, 3.9, 4.4, 5.1, 5.6, 6.3),
+  y=c(1.4, 2.6, 1.0, 3.7, 5.5, 3.2, 3.0, 4.9, 6.3))
+model <- lm(y ~ x, data = df)
+df_mean <- df %>% 
+  mutate(y1 = mean(y), x1 = x)
+# rename(x = x2)
+df_regr <- df %>% 
+  mutate(y1 = predict(model, data.frame(x = df$x)), x1 = x)
+regr_plot <- df %>% 
+  ggplot(aes(x, y))+
+  geom_point()+
+  geom_smooth(formula = 'y ~ x', method = 'lm', se = FALSE, linewidth = 0.7)+
+  geom_segment(aes(x = x1, y = y1, xend = x, yend = y),
+               data = df_regr, linewidth = 0.35, alpha = 0.7, linetype = 2,
+               color = 'gray40')+
+  ggtitle('Residual variation')+
+  geom_segment(aes(x = 0, y = y1, xend = x, yend = y1), 
+               df_regr, linewidth = 0.5, 
+               linetype = 2, color = 'red')+
+  theme_bw()+
+  scale_x_continuous(limits = c(0, 6.5), expand=c(0,0))+
+  
+  theme(plot.title = element_text(hjust = 0.5))
+pl_1res <- ggplot(data.frame(fit = fitted(model), 
+                             res = residuals(model)), 
+                  aes(x = fit, y = res)) + 
+  geom_point() + 
+  geom_hline(yintercept = 0) + 
+  geom_segment(aes(x = fit, xend = fit, 
+                   y = res, yend=min(res)-0.2), 
+               data = data.frame(fit = fitted(model), 
+                             res = residuals(model)),
+               linewidth = 0.4, 
+               linetype = 2, color = 'red')+
+  xlab("Fitted") + 
+  ylab("Residuals")+theme_bw()
+regr_plot + pl_1res
+```
+
+## Влиятельные наблюдения - выбросы, аутлайеры
+
+Оцениваются с помощью расстояния Кука
+
+$$
+D_i = \frac{\sum{( \color{blue}{\hat{y_{j}}} - \color{red}{\hat{y}_{j(i)}})^2}}{p \; MS_e}
+$$
+
+$\color{blue}{\hat{y_j}}$ --- значение, предсказанное полной моделью.
+
+$\color{red}{\hat{y}_{j(i)}}$ --- значение, предсказанное моделью, построенной без учета $i$-го значения предиктора
+
+$p$ --- количество параметров в модели
+
+$MS_{e}$ --- среднеквадратичная ошибка модели ($\hat\sigma^2$)
+
+Пороговое значение можно рассчитать по формуле, но вообще существуют разные способы выбора порога:
+
+$$
+Cutoff = \frac{4}{ n - p}
+$$
+
+Формулы могут быть разные еще и потому, учитывают они интерсепт как оцениваемый параметр или нет.
+
+## Давайте построим модель
+
+Предсказание цены дома в зависимости от всех количественных переменных. Сначала отберем все численные переменные (можно строить модель и с дискретными предикторами, но пока построим так) и включим их в модель.
+
+```{r}
+happy_score_data_numeric <- happy_score_data %>% select(where(is.numeric))
+model_full <- lm(happyScore ~ ., happy_score_data_numeric)
+summary(model_full)
+```
+
+## Интерпретация результатов
+
+Все предикторы незначимы, при этом сама модель значима (p-value модели \< 0.05). Это говорит о том, что в данных скорее всего есть мультиколлинеарность (про это чуть дальше).
+
+Вопрос в том, что лучше, включить больше или меньше предикторов в модель?
+
+::: fragment
+Опасность переобучения (overfitting) -\> нарисовать
+:::
+
+## Adjusted R-squared
+
+Модель с бОльшим числом предикторов почти всегда будет иметь больший $R^2$. Нужно ввести поправочный коэффициент, который штрафует модель за бОльшее число предикторов.
+
+$$
+R^2_{adj} = 1- (1-R^2)\frac{n-1}{n-p}
+$$
+
+p - количество параметров в модели, n - размер выборки.
+
+Кроме этого, для отбора количества предикторов модели существует [AIC](https://en.wikipedia.org/wiki/Akaike_information_criterion) (информационный критерий Акаике) и [BIC](https://en.wikipedia.org/wiki/Bayesian_information_criterion) (байесовский информационный критерий).
+
+## Проблема мультиколлинеарности
+
+Мультиколлинеарность --- наличие линейной зависимости между независимыми переменными в регрессионной модели.
+
+При наличии мультиколлинеарности оценки параметров неточны, увеличиваются стандартные ошибки, а значит сложно интерпретировать влияние предикторов на отклик.
+
+## Variance inflation factor для оценки мультиколлинеарности
+
+Для предиктора $i$ считается линейная регрессия, где все остальные предикторы предсказывают предиктор $i$*.*
+
+Сам VIF-фактор считается на основе полученного R^2^ регрессии:
+
+$$
+VIF = \frac{1}{1 - R_i^2}
+$$
+
+Чем больше $R_i^2$, тем больше $VIF_i$. Это означает, что предиктор сам по себе хорошо объясняется другими предикторами. Какой VIF считать большим? Здесь нет единого мнения, но если он выше 3 (4, 5) и особенно если он выше 10, то с этим нужно что-то делать.
+
+## Подсчет VIF
+
+VIF можно посчитать с помощью функции `vif()` из пакета `car`.
+
+```{r}
+library(car)
+vif(model_full)
+```
+
+Здесь конечно экстремальная ситуация в связи с крайне высокой корреляцией переменных. Это видно и при подсчете матрицы корреляций, так что для реальной задачи не очень разумно включать сразу все переменные в модель, не проверив корреляции.
+
+Как вариант, можно заменить исходные предикторы новыми ортогональными переменными с помощью метода главных компонент (PCA).
+
+```{r}
+#| output-location: slide
+corrplot::corrplot(cor(happy_score_data_numeric))
+```
+
+## Отбор коррелирующих предикторов на основании VIF
+
+С помощью базовой функции `update()` можно убирать сильно коррелирущие предикторы.
+
+```{r}
+model_without_adj <- update(model_full, .~. -adjusted_satisfaction)
+vif(model_without_adj)
+summary(model_without_adj)
+```
+
+Теперь сильно коррелируют `avg_income` и `median_income`, что логично и было видно на корреляционном графике. Уберем одну из этих переменных.
+
+## Отбор коррелирующих предикторов на основании VIF
+
+```{r}
+model_without_avg_income <- update(model_without_adj, .~. -avg_income)
+vif(model_without_avg_income)
+summary(model_without_avg_income)
+```
+
+## Отбор моделей
+
+Есть несколько основных стратегий отбора
+
+1.  Backward selection: full null -\> null model
+2.  Forward selection: null model -\> full model
+3.  Mixed selection: комбинация 1 и 2 способа
+
+## Уберем незначимые предикторы из модели: income_inequality
+
+```{r}
+model_without_ineq <- update(model_without_avg_income, .~. -income_inequality)
+vif(model_without_ineq)
+summary(model_without_ineq)
+```
+
+## Уберем незначимые предикторы из модели: GDP
+
+```{r}
+model_without_gdp <-lm(happyScore ~ avg_satisfaction +
+                         std_satisfaction + median_income, 
+                       data = happy_score_data_numeric)
+vif(model_without_gdp)
+summary(model_without_gdp)
+```
+
+## Модель с дискретными предикторами
+
+```{r}
+model_region <- lm(happyScore ~ avg_satisfaction +       median_income + region, data = happy_score_data)
+summary(model_region)
+```
+
+## Спасибо за внимание!
+
+Если понравилось, переходите по [ссылке](https://www.tinkoff.ru/rm/ubogoeva.elena1/TSRBI31474):
+
+![](images/qrcode.png)
