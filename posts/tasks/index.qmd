@@ -9,3 +9,9 @@ draft: true
 -   [Задание 1](task1.qmd)
 
 -   [Задание 2](task2.qmd)
+
+-   [Задание 3](task3.qmd)
+
+-   [Задание 4](task4.qmd)
+
+-   [Задание 5](https://polyalineli.github.io/r_plots_guide/homework.html#1) (составлено Полиной Кисаретовой)
